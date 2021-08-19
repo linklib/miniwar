@@ -13,11 +13,18 @@ export const MainMenu: React.FC = () => {
     <Link href="/signin">SignIn</Link>
   )
 
+  // let user: JSX.Element | undefined
+
+  // if(context?.user) {
+  //   user = <div>{context.user.fullname || context.user.username || 'NoName'}</div>
+  // }
+
   return (
     <MainMenuStyled>
       <Link href="/">MainPage</Link>
       <Link href="/lessons">Lessons</Link>
       <Link href="/lessons/lesson1">Lesson1</Link>
+      <Link href="/lessons/lesson2">Lesson2</Link>
       <div className="separator" />
 
       {context?.hello || ''}
