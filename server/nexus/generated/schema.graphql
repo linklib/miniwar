@@ -213,6 +213,11 @@ input LetterWhereInput {
 }
 
 type Mutation {
+  createResetPasswordProcessor(
+    where: UserWhereUniqueInput!
+  ): ResetPasswordResponse!
+  resetPasswordProcessor(where: ResetPasswordProcessorWhereInput!): AuthPayload!
+
   """
   Авторизация
   """
@@ -384,6 +389,47 @@ type RequestError {
   message: String!
 }
 
+type ResetPassword {
+  foo: String
+  id: ID!
+}
+
+input ResetPasswordListRelationFilter {
+  every: ResetPasswordWhereInput
+  none: ResetPasswordWhereInput
+  some: ResetPasswordWhereInput
+}
+
+input ResetPasswordProcessorWhereInput {
+  User: UserWhereUniqueInput!
+  code: ID!
+}
+
+type ResetPasswordResponse {
+  data: ResetPassword
+  errors: [RequestError!]!
+  message: String!
+  success: Boolean!
+}
+
+input ResetPasswordWhereInput {
+  AND: [ResetPasswordWhereInput!]
+  NOT: [ResetPasswordWhereInput!]
+  OR: [ResetPasswordWhereInput!]
+  User: StringFilter
+  User_ResetPasswordToUser: UserWhereInput
+  code: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  password: StringFilter
+  updatedAt: DateTimeFilter
+  validTill: DateTimeNullableFilter
+}
+
+input ResetPasswordWhereUniqueInput {
+  id: ID
+}
+
 input SingleUploadInput {
   """
   В какую директорю загружать файл
@@ -529,6 +575,7 @@ input UserWhereInput {
   Letters: LetterListRelationFilter
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
+  ResetPasswords: ResetPasswordListRelationFilter
   Tokens: TokenListRelationFilter
   active: BoolFilter
   createdAt: DateTimeFilter

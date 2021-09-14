@@ -49,8 +49,6 @@ type Mail = {
 
 const { DKIMSign } = dkimSigner
 
-// console.log("DKIMSign", DKIMSign);
-
 const CRLF = '\r\n'
 
 function dummy() {
@@ -478,9 +476,10 @@ export const Sendmail = function (options: SendmailProps) {
           sendToSMTP(domain, srcHost, from, groups[domain], message, callback)
         }
       } catch (error) {
-        callback(error)
+        callback(error as Error)
       }
     })
   }
+
   return sendmail
 }

@@ -204,6 +204,8 @@ export interface LetterWhereInput {
 
 export interface Mutation {
   __typename?: 'Mutation';
+  createResetPasswordProcessor: ResetPasswordResponse;
+  resetPasswordProcessor: AuthPayload;
   /** Авторизация */
   signin: AuthPayload;
   /** Регистрация */
@@ -211,6 +213,16 @@ export interface Mutation {
   /** Загрузка файла */
   singleUpload?: Maybe<File>;
 }
+
+
+export type MutationCreateResetPasswordProcessorArgs = {
+  where: UserWhereUniqueInput;
+};
+
+
+export type MutationResetPasswordProcessorArgs = {
+  where: ResetPasswordProcessorWhereInput;
+};
 
 
 export type MutationSigninArgs = {
@@ -386,6 +398,49 @@ export interface RequestError {
   message: Scalars['String'];
 }
 
+export interface ResetPassword {
+  __typename?: 'ResetPassword';
+  foo?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+}
+
+export interface ResetPasswordListRelationFilter {
+  every?: Maybe<ResetPasswordWhereInput>;
+  none?: Maybe<ResetPasswordWhereInput>;
+  some?: Maybe<ResetPasswordWhereInput>;
+}
+
+export interface ResetPasswordProcessorWhereInput {
+  User: UserWhereUniqueInput;
+  code: Scalars['ID'];
+}
+
+export interface ResetPasswordResponse {
+  __typename?: 'ResetPasswordResponse';
+  data?: Maybe<ResetPassword>;
+  errors: Array<RequestError>;
+  message: Scalars['String'];
+  success: Scalars['Boolean'];
+}
+
+export interface ResetPasswordWhereInput {
+  AND?: Maybe<Array<ResetPasswordWhereInput>>;
+  NOT?: Maybe<Array<ResetPasswordWhereInput>>;
+  OR?: Maybe<Array<ResetPasswordWhereInput>>;
+  User?: Maybe<StringFilter>;
+  User_ResetPasswordToUser?: Maybe<UserWhereInput>;
+  code?: Maybe<StringFilter>;
+  createdAt?: Maybe<DateTimeFilter>;
+  id?: Maybe<StringFilter>;
+  password?: Maybe<StringFilter>;
+  updatedAt?: Maybe<DateTimeFilter>;
+  validTill?: Maybe<DateTimeNullableFilter>;
+}
+
+export interface ResetPasswordWhereUniqueInput {
+  id?: Maybe<Scalars['ID']>;
+}
+
 export interface SingleUploadInput {
   /** В какую директорю загружать файл */
   directory?: Maybe<Scalars['String']>;
@@ -501,6 +556,7 @@ export interface UserWhereInput {
   Letters?: Maybe<LetterListRelationFilter>;
   NOT?: Maybe<Array<UserWhereInput>>;
   OR?: Maybe<Array<UserWhereInput>>;
+  ResetPasswords?: Maybe<ResetPasswordListRelationFilter>;
   Tokens?: Maybe<TokenListRelationFilter>;
   active?: Maybe<BoolFilter>;
   createdAt?: Maybe<DateTimeFilter>;
