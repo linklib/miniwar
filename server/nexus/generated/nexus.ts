@@ -435,6 +435,7 @@ export interface NexusGenInputs {
 
 export interface NexusGenEnums {
   LetterStatus: 'Created' | 'Error' | 'Processing' | 'Sended'
+  Role: 'ADMIN' | 'USER'
   SortOrder: 'asc' | 'desc'
 }
 
@@ -562,6 +563,7 @@ export interface NexusGenFieldTypes {
     fullname: string | null // String
     id: string // String!
     image: string | null // String
+    role: NexusGenEnums['Role'] | null // Role
     showEmail: boolean // Boolean!
     showFullname: boolean // Boolean!
     sudo: boolean | null // Boolean
@@ -644,6 +646,7 @@ export interface NexusGenFieldTypeNames {
     fullname: 'String'
     id: 'String'
     image: 'String'
+    role: 'Role'
     showEmail: 'Boolean'
     showFullname: 'Boolean'
     sudo: 'Boolean'

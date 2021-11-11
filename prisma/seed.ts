@@ -17,6 +17,7 @@ async function main() {
       username: 'admin',
       password: await createPassword(password),
       sudo: true,
+      role: 'ADMIN',
     })
   }
 

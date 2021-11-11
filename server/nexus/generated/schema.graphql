@@ -437,6 +437,11 @@ input ResetPasswordWhereUniqueInput {
   id: ID
 }
 
+enum Role {
+  ADMIN
+  USER
+}
+
 input SingleUploadInput {
   """
   В какую директорю загружать файл
@@ -542,6 +547,7 @@ type User {
   Avatar
   """
   image: String
+  role: Role
 
   """
   Показывать емейл другим пользователям

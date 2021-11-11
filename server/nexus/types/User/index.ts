@@ -1,5 +1,11 @@
 import { Prisma } from '@prisma/client'
-import { objectType, extendType, inputObjectType, nonNull } from 'nexus'
+import {
+  objectType,
+  extendType,
+  inputObjectType,
+  nonNull,
+  enumType,
+} from 'nexus'
 import { signin } from './resolvers/signin'
 import { signup } from './resolvers/signup'
 
@@ -134,6 +140,7 @@ export const User = objectType({
       },
     })
     t.string('username')
+    t.field('role', { type: Role })
     t.boolean('sudo')
     t.nonNull.boolean('showEmail', {
       description: 'Показывать емейл другим пользователям',
@@ -156,4 +163,9 @@ export const User = objectType({
       },
     })
   },
+})
+
+const Role = enumType({
+  name: 'Role',
+  members: ['USER', 'ADMIN'],
 })
