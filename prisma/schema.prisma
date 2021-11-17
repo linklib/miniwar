@@ -128,6 +128,7 @@ model Post {
   createdAt   DateTime    @default(now("0")) @db.DateTime(0)
   updatedAt   DateTime    @default(now("0")) @updatedAt @db.DateTime(0)
   title       String
+  urlname     String
   description String?
   image       String?
   createdById String      @db.VarChar(32)
@@ -147,16 +148,18 @@ model PostImage {
 }
 
 model Catalogtop {
-  id        String @id @default(cuid()) @db.VarChar(32)
-  title     String
-  Catalogs  Catalog[]
+  id       String    @id @default(cuid()) @db.VarChar(32)
+  title    String
+  urlname  String
+  Catalogs Catalog[]
 }
 
 model Catalog {
-  id     String @id @default(cuid()) @db.VarChar(32)
-  title  String
-  CatalogtopId String @db.VarChar(32)
-  Catalogtop   Catalogtop   @relation(fields: [CatalogtopId], references: [id])
-  postId String @db.VarChar(32)
-  Post   Post   @relation(fields: [postId], references: [id])
+  id           String     @id @default(cuid()) @db.VarChar(32)
+  title        String
+  urlname      String
+  CatalogtopId String     @db.VarChar(32)
+  Catalogtop   Catalogtop @relation(fields: [CatalogtopId], references: [id])
+  postId       String?     @db.VarChar(32)
+  Post         Post?       @relation(fields: [postId], references: [id])
 }

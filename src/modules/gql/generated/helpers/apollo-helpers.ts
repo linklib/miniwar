@@ -7,6 +7,21 @@ export type AuthPayloadFieldPolicy = {
 	success?: FieldPolicy<any> | FieldReadFunction<any>,
 	token?: FieldPolicy<any> | FieldReadFunction<any>
 };
+export type CatalogKeySpecifier = ('Catalogtop' | 'CatalogtopId' | 'id' | 'title' | 'urlname' | CatalogKeySpecifier)[];
+export type CatalogFieldPolicy = {
+	Catalogtop?: FieldPolicy<any> | FieldReadFunction<any>,
+	CatalogtopId?: FieldPolicy<any> | FieldReadFunction<any>,
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	title?: FieldPolicy<any> | FieldReadFunction<any>,
+	urlname?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type CatalogtopKeySpecifier = ('catalogs' | 'id' | 'title' | 'urlname' | CatalogtopKeySpecifier)[];
+export type CatalogtopFieldPolicy = {
+	catalogs?: FieldPolicy<any> | FieldReadFunction<any>,
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	title?: FieldPolicy<any> | FieldReadFunction<any>,
+	urlname?: FieldPolicy<any> | FieldReadFunction<any>
+};
 export type FileKeySpecifier = ('createdAt' | 'encoding' | 'filename' | 'id' | 'mimetype' | 'name' | 'path' | 'rank' | 'size' | 'updatedAt' | FileKeySpecifier)[];
 export type FileFieldPolicy = {
 	createdAt?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -28,8 +43,12 @@ export type MutationFieldPolicy = {
 	signup?: FieldPolicy<any> | FieldReadFunction<any>,
 	singleUpload?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type QueryKeySpecifier = ('file' | 'files' | 'filesCount' | 'me' | 'tokens' | 'user' | 'users' | 'usersCount' | QueryKeySpecifier)[];
+export type QueryKeySpecifier = ('catalog' | 'catalogs' | 'catalogtop' | 'catalogtops' | 'file' | 'files' | 'filesCount' | 'me' | 'tokens' | 'user' | 'users' | 'usersCount' | QueryKeySpecifier)[];
 export type QueryFieldPolicy = {
+	catalog?: FieldPolicy<any> | FieldReadFunction<any>,
+	catalogs?: FieldPolicy<any> | FieldReadFunction<any>,
+	catalogtop?: FieldPolicy<any> | FieldReadFunction<any>,
+	catalogtops?: FieldPolicy<any> | FieldReadFunction<any>,
 	file?: FieldPolicy<any> | FieldReadFunction<any>,
 	files?: FieldPolicy<any> | FieldReadFunction<any>,
 	filesCount?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -64,7 +83,7 @@ export type TokenFieldPolicy = {
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
 	userId?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type UserKeySpecifier = ('Tokens' | 'createdAt' | 'email' | 'fullname' | 'id' | 'image' | 'showEmail' | 'showFullname' | 'sudo' | 'updatedAt' | 'username' | UserKeySpecifier)[];
+export type UserKeySpecifier = ('Tokens' | 'createdAt' | 'email' | 'fullname' | 'id' | 'image' | 'role' | 'showEmail' | 'showFullname' | 'sudo' | 'updatedAt' | 'username' | UserKeySpecifier)[];
 export type UserFieldPolicy = {
 	Tokens?: FieldPolicy<any> | FieldReadFunction<any>,
 	createdAt?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -72,6 +91,7 @@ export type UserFieldPolicy = {
 	fullname?: FieldPolicy<any> | FieldReadFunction<any>,
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
 	image?: FieldPolicy<any> | FieldReadFunction<any>,
+	role?: FieldPolicy<any> | FieldReadFunction<any>,
 	showEmail?: FieldPolicy<any> | FieldReadFunction<any>,
 	showFullname?: FieldPolicy<any> | FieldReadFunction<any>,
 	sudo?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -82,6 +102,14 @@ export type TypedTypePolicies = TypePolicies & {
 	AuthPayload?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | AuthPayloadKeySpecifier | (() => undefined | AuthPayloadKeySpecifier),
 		fields?: AuthPayloadFieldPolicy,
+	},
+	Catalog?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | CatalogKeySpecifier | (() => undefined | CatalogKeySpecifier),
+		fields?: CatalogFieldPolicy,
+	},
+	Catalogtop?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | CatalogtopKeySpecifier | (() => undefined | CatalogtopKeySpecifier),
+		fields?: CatalogtopFieldPolicy,
 	},
 	File?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | FileKeySpecifier | (() => undefined | FileKeySpecifier),

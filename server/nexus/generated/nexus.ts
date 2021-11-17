@@ -4,7 +4,14 @@
  */
 
 import type { PrismaContext } from './../context/index'
-import type { User, File, ResetPassword, Token } from '@prisma/client'
+import type {
+  User,
+  File,
+  ResetPassword,
+  Token,
+  Catalogtop,
+  Catalog,
+} from '@prisma/client'
 import type { core } from 'nexus'
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
@@ -59,6 +66,57 @@ export interface NexusGenInputs {
     equals?: boolean | null // Boolean
     not?: NexusGenInputs['NestedBoolFilter'] | null // NestedBoolFilter
   }
+  CatalogListRelationFilter: {
+    // input type
+    every?: NexusGenInputs['CatalogWhereInput'] | null // CatalogWhereInput
+    none?: NexusGenInputs['CatalogWhereInput'] | null // CatalogWhereInput
+    some?: NexusGenInputs['CatalogWhereInput'] | null // CatalogWhereInput
+  }
+  CatalogOrderByInput: {
+    // input type
+    CatalogtopId?: NexusGenEnums['SortOrder'] | null // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null // SortOrder
+    postId?: NexusGenEnums['SortOrder'] | null // SortOrder
+    title?: NexusGenEnums['SortOrder'] | null // SortOrder
+    urlname?: NexusGenEnums['SortOrder'] | null // SortOrder
+  }
+  CatalogWhereInput: {
+    // input type
+    AND?: NexusGenInputs['CatalogWhereInput'][] | null // [CatalogWhereInput!]
+    Catalogtop?: NexusGenInputs['CatalogtopWhereInput'] | null // CatalogtopWhereInput
+    CatalogtopId?: NexusGenInputs['StringFilter'] | null // StringFilter
+    NOT?: NexusGenInputs['CatalogWhereInput'][] | null // [CatalogWhereInput!]
+    OR?: NexusGenInputs['CatalogWhereInput'][] | null // [CatalogWhereInput!]
+    Post?: NexusGenInputs['PostWhereInput'] | null // PostWhereInput
+    id?: NexusGenInputs['StringFilter'] | null // StringFilter
+    postId?: NexusGenInputs['StringNullableFilter'] | null // StringNullableFilter
+    title?: NexusGenInputs['StringFilter'] | null // StringFilter
+    urlname?: NexusGenInputs['StringFilter'] | null // StringFilter
+  }
+  CatalogWhereUniqueInput: {
+    // input type
+    id?: string | null // String
+  }
+  CatalogtopOrderByInput: {
+    // input type
+    id?: NexusGenEnums['SortOrder'] | null // SortOrder
+    title?: NexusGenEnums['SortOrder'] | null // SortOrder
+    urlname?: NexusGenEnums['SortOrder'] | null // SortOrder
+  }
+  CatalogtopWhereInput: {
+    // input type
+    AND?: NexusGenInputs['CatalogtopWhereInput'][] | null // [CatalogtopWhereInput!]
+    Catalogs?: NexusGenInputs['CatalogListRelationFilter'] | null // CatalogListRelationFilter
+    NOT?: NexusGenInputs['CatalogtopWhereInput'][] | null // [CatalogtopWhereInput!]
+    OR?: NexusGenInputs['CatalogtopWhereInput'][] | null // [CatalogtopWhereInput!]
+    id?: NexusGenInputs['StringFilter'] | null // StringFilter
+    title?: NexusGenInputs['StringFilter'] | null // StringFilter
+    urlname?: NexusGenInputs['StringFilter'] | null // StringFilter
+  }
+  CatalogtopWhereUniqueInput: {
+    // input type
+    id?: string | null // String
+  }
   DateTimeFilter: {
     // input type
     equals?: NexusGenScalars['DateTime'] | null // DateTime
@@ -88,6 +146,13 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedEnumLetterStatusFilter'] | null // NestedEnumLetterStatusFilter
     notIn?: NexusGenEnums['LetterStatus'][] | null // [LetterStatus!]
   }
+  EnumRoleFilter: {
+    // input type
+    equals?: NexusGenEnums['Role'] | null // Role
+    in?: NexusGenEnums['Role'][] | null // [Role!]
+    not?: NexusGenInputs['NestedEnumRoleFilter'] | null // NestedEnumRoleFilter
+    notIn?: NexusGenEnums['Role'][] | null // [Role!]
+  }
   FileListRelationFilter: {
     // input type
     every?: NexusGenInputs['FileWhereInput'] | null // FileWhereInput
@@ -114,6 +179,7 @@ export interface NexusGenInputs {
     CreatedBy?: NexusGenInputs['UserWhereInput'] | null // UserWhereInput
     NOT?: NexusGenInputs['FileWhereInput'][] | null // [FileWhereInput!]
     OR?: NexusGenInputs['FileWhereInput'][] | null // [FileWhereInput!]
+    PostImages?: NexusGenInputs['PostImageListRelationFilter'] | null // PostImageListRelationFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null // DateTimeFilter
     createdById?: NexusGenInputs['StringNullableFilter'] | null // StringNullableFilter
     encoding?: NexusGenInputs['StringFilter'] | null // StringFilter
@@ -223,6 +289,13 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedEnumLetterStatusFilter'] | null // NestedEnumLetterStatusFilter
     notIn?: NexusGenEnums['LetterStatus'][] | null // [LetterStatus!]
   }
+  NestedEnumRoleFilter: {
+    // input type
+    equals?: NexusGenEnums['Role'] | null // Role
+    in?: NexusGenEnums['Role'][] | null // [Role!]
+    not?: NexusGenInputs['NestedEnumRoleFilter'] | null // NestedEnumRoleFilter
+    notIn?: NexusGenEnums['Role'][] | null // [Role!]
+  }
   NestedFloatFilter: {
     // input type
     equals?: number | null // Float
@@ -283,6 +356,46 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedStringNullableFilter'] | null // NestedStringNullableFilter
     notIn?: string[] | null // [String!]
     startsWith?: string | null // String
+  }
+  PostImageListRelationFilter: {
+    // input type
+    every?: NexusGenInputs['PostImageWhereInput'] | null // PostImageWhereInput
+    none?: NexusGenInputs['PostImageWhereInput'] | null // PostImageWhereInput
+    some?: NexusGenInputs['PostImageWhereInput'] | null // PostImageWhereInput
+  }
+  PostImageWhereInput: {
+    // input type
+    AND?: NexusGenInputs['PostImageWhereInput'][] | null // [PostImageWhereInput!]
+    File?: NexusGenInputs['FileWhereInput'] | null // FileWhereInput
+    NOT?: NexusGenInputs['PostImageWhereInput'][] | null // [PostImageWhereInput!]
+    OR?: NexusGenInputs['PostImageWhereInput'][] | null // [PostImageWhereInput!]
+    Post?: NexusGenInputs['PostWhereInput'] | null // PostWhereInput
+    fileId?: NexusGenInputs['StringFilter'] | null // StringFilter
+    id?: NexusGenInputs['StringFilter'] | null // StringFilter
+    postId?: NexusGenInputs['StringFilter'] | null // StringFilter
+  }
+  PostListRelationFilter: {
+    // input type
+    every?: NexusGenInputs['PostWhereInput'] | null // PostWhereInput
+    none?: NexusGenInputs['PostWhereInput'] | null // PostWhereInput
+    some?: NexusGenInputs['PostWhereInput'] | null // PostWhereInput
+  }
+  PostWhereInput: {
+    // input type
+    AND?: NexusGenInputs['PostWhereInput'][] | null // [PostWhereInput!]
+    Catalog?: NexusGenInputs['CatalogWhereInput'] | null // CatalogWhereInput
+    CreatedBy?: NexusGenInputs['UserWhereInput'] | null // UserWhereInput
+    NOT?: NexusGenInputs['PostWhereInput'][] | null // [PostWhereInput!]
+    OR?: NexusGenInputs['PostWhereInput'][] | null // [PostWhereInput!]
+    PostImages?: NexusGenInputs['PostImageListRelationFilter'] | null // PostImageListRelationFilter
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null // DateTimeFilter
+    createdById?: NexusGenInputs['StringFilter'] | null // StringFilter
+    description?: NexusGenInputs['StringNullableFilter'] | null // StringNullableFilter
+    id?: NexusGenInputs['StringFilter'] | null // StringFilter
+    image?: NexusGenInputs['StringNullableFilter'] | null // StringNullableFilter
+    title?: NexusGenInputs['StringFilter'] | null // StringFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null // DateTimeFilter
+    urlname?: NexusGenInputs['StringFilter'] | null // StringFilter
   }
   ResetPasswordListRelationFilter: {
     // input type
@@ -384,6 +497,7 @@ export interface NexusGenInputs {
     id?: NexusGenEnums['SortOrder'] | null // SortOrder
     image?: NexusGenEnums['SortOrder'] | null // SortOrder
     password?: NexusGenEnums['SortOrder'] | null // SortOrder
+    role?: NexusGenEnums['SortOrder'] | null // SortOrder
     showEmail?: NexusGenEnums['SortOrder'] | null // SortOrder
     showFullname?: NexusGenEnums['SortOrder'] | null // SortOrder
     sudo?: NexusGenEnums['SortOrder'] | null // SortOrder
@@ -410,6 +524,7 @@ export interface NexusGenInputs {
     Letters?: NexusGenInputs['LetterListRelationFilter'] | null // LetterListRelationFilter
     NOT?: NexusGenInputs['UserWhereInput'][] | null // [UserWhereInput!]
     OR?: NexusGenInputs['UserWhereInput'][] | null // [UserWhereInput!]
+    Posts?: NexusGenInputs['PostListRelationFilter'] | null // PostListRelationFilter
     ResetPasswords?: NexusGenInputs['ResetPasswordListRelationFilter'] | null // ResetPasswordListRelationFilter
     Tokens?: NexusGenInputs['TokenListRelationFilter'] | null // TokenListRelationFilter
     active?: NexusGenInputs['BoolFilter'] | null // BoolFilter
@@ -419,6 +534,7 @@ export interface NexusGenInputs {
     id?: NexusGenInputs['StringFilter'] | null // StringFilter
     image?: NexusGenInputs['StringNullableFilter'] | null // StringNullableFilter
     password?: NexusGenInputs['StringNullableFilter'] | null // StringNullableFilter
+    role?: NexusGenInputs['EnumRoleFilter'] | null // EnumRoleFilter
     showEmail?: NexusGenInputs['BoolFilter'] | null // BoolFilter
     showFullname?: NexusGenInputs['BoolFilter'] | null // BoolFilter
     sudo?: NexusGenInputs['BoolFilter'] | null // BoolFilter
@@ -459,6 +575,8 @@ export interface NexusGenObjects {
     success: boolean // Boolean!
     token?: string | null // String
   }
+  Catalog: Catalog
+  Catalogtop: Catalogtop
   File: File
   Mutation: {}
   Query: {}
@@ -498,6 +616,21 @@ export interface NexusGenFieldTypes {
     success: boolean // Boolean!
     token: string | null // String
   }
+  Catalog: {
+    // field return type
+    Catalogtop: NexusGenRootTypes['Catalogtop'] | null // Catalogtop
+    CatalogtopId: string | null // String
+    id: string // String!
+    title: string // String!
+    urlname: string // String!
+  }
+  Catalogtop: {
+    // field return type
+    catalogs: NexusGenRootTypes['Catalog'][] | null // [Catalog!]
+    id: string // String!
+    title: string // String!
+    urlname: string // String!
+  }
   File: {
     // field return type
     createdAt: NexusGenScalars['DateTime'] // DateTime!
@@ -521,6 +654,10 @@ export interface NexusGenFieldTypes {
   }
   Query: {
     // field return type
+    catalog: NexusGenRootTypes['Catalog'] | null // Catalog
+    catalogs: NexusGenRootTypes['Catalog'][] // [Catalog!]!
+    catalogtop: NexusGenRootTypes['Catalogtop'] | null // Catalogtop
+    catalogtops: NexusGenRootTypes['Catalogtop'][] // [Catalogtop!]!
     file: NexusGenRootTypes['File'] | null // File
     files: NexusGenRootTypes['File'][] // [File!]!
     filesCount: number // Int!
@@ -581,6 +718,21 @@ export interface NexusGenFieldTypeNames {
     success: 'Boolean'
     token: 'String'
   }
+  Catalog: {
+    // field return type name
+    Catalogtop: 'Catalogtop'
+    CatalogtopId: 'String'
+    id: 'String'
+    title: 'String'
+    urlname: 'String'
+  }
+  Catalogtop: {
+    // field return type name
+    catalogs: 'Catalog'
+    id: 'String'
+    title: 'String'
+    urlname: 'String'
+  }
   File: {
     // field return type name
     createdAt: 'DateTime'
@@ -604,6 +756,10 @@ export interface NexusGenFieldTypeNames {
   }
   Query: {
     // field return type name
+    catalog: 'Catalog'
+    catalogs: 'Catalog'
+    catalogtop: 'Catalogtop'
+    catalogtops: 'Catalogtop'
     file: 'File'
     files: 'File'
     filesCount: 'Int'
@@ -681,6 +837,30 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    catalog: {
+      // args
+      where: NexusGenInputs['CatalogWhereUniqueInput'] // CatalogWhereUniqueInput!
+    }
+    catalogs: {
+      // args
+      cursor?: NexusGenInputs['CatalogWhereUniqueInput'] | null // CatalogWhereUniqueInput
+      orderBy?: NexusGenInputs['CatalogOrderByInput'][] | null // [CatalogOrderByInput!]
+      skip?: number | null // Int
+      take?: number | null // Int
+      where?: NexusGenInputs['CatalogWhereInput'] | null // CatalogWhereInput
+    }
+    catalogtop: {
+      // args
+      where: NexusGenInputs['CatalogtopWhereUniqueInput'] // CatalogtopWhereUniqueInput!
+    }
+    catalogtops: {
+      // args
+      cursor?: NexusGenInputs['CatalogtopWhereUniqueInput'] | null // CatalogtopWhereUniqueInput
+      orderBy?: NexusGenInputs['CatalogtopOrderByInput'][] | null // [CatalogtopOrderByInput!]
+      skip?: number | null // Int
+      take?: number | null // Int
+      where?: NexusGenInputs['CatalogtopWhereInput'] | null // CatalogtopWhereInput
+    }
     file: {
       // args
       where: NexusGenInputs['FileWhereUniqueInput'] // FileWhereUniqueInput!

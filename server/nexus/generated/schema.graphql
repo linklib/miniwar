@@ -18,6 +18,78 @@ input BoolFilter {
 }
 
 """
+Пункт каталога
+"""
+type Catalog {
+  Catalogtop: Catalogtop
+  CatalogtopId: String
+  id: String!
+  title: String!
+  urlname: String!
+}
+
+input CatalogListRelationFilter {
+  every: CatalogWhereInput
+  none: CatalogWhereInput
+  some: CatalogWhereInput
+}
+
+input CatalogOrderByInput {
+  CatalogtopId: SortOrder
+  id: SortOrder
+  postId: SortOrder
+  title: SortOrder
+  urlname: SortOrder
+}
+
+input CatalogWhereInput {
+  AND: [CatalogWhereInput!]
+  Catalogtop: CatalogtopWhereInput
+  CatalogtopId: StringFilter
+  NOT: [CatalogWhereInput!]
+  OR: [CatalogWhereInput!]
+  Post: PostWhereInput
+  id: StringFilter
+  postId: StringNullableFilter
+  title: StringFilter
+  urlname: StringFilter
+}
+
+input CatalogWhereUniqueInput {
+  id: String
+}
+
+"""
+Верхний уровень каталога
+"""
+type Catalogtop {
+  catalogs: [Catalog!]
+  id: String!
+  title: String!
+  urlname: String!
+}
+
+input CatalogtopOrderByInput {
+  id: SortOrder
+  title: SortOrder
+  urlname: SortOrder
+}
+
+input CatalogtopWhereInput {
+  AND: [CatalogtopWhereInput!]
+  Catalogs: CatalogListRelationFilter
+  NOT: [CatalogtopWhereInput!]
+  OR: [CatalogtopWhereInput!]
+  id: StringFilter
+  title: StringFilter
+  urlname: StringFilter
+}
+
+input CatalogtopWhereUniqueInput {
+  id: String
+}
+
+"""
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
 scalar DateTime
@@ -49,6 +121,13 @@ input EnumLetterStatusFilter {
   in: [LetterStatus!]
   not: NestedEnumLetterStatusFilter
   notIn: [LetterStatus!]
+}
+
+input EnumRoleFilter {
+  equals: Role
+  in: [Role!]
+  not: NestedEnumRoleFilter
+  notIn: [Role!]
 }
 
 """
@@ -127,6 +206,7 @@ input FileWhereInput {
   CreatedBy: UserWhereInput
   NOT: [FileWhereInput!]
   OR: [FileWhereInput!]
+  PostImages: PostImageListRelationFilter
   createdAt: DateTimeFilter
   createdById: StringNullableFilter
   encoding: StringFilter
@@ -275,6 +355,13 @@ input NestedEnumLetterStatusFilter {
   notIn: [LetterStatus!]
 }
 
+input NestedEnumRoleFilter {
+  equals: Role
+  in: [Role!]
+  not: NestedEnumRoleFilter
+  notIn: [Role!]
+}
+
 input NestedFloatFilter {
   equals: Float
   gt: Float
@@ -336,7 +423,79 @@ input NestedStringNullableFilter {
   startsWith: String
 }
 
+input PostImageListRelationFilter {
+  every: PostImageWhereInput
+  none: PostImageWhereInput
+  some: PostImageWhereInput
+}
+
+input PostImageWhereInput {
+  AND: [PostImageWhereInput!]
+  File: FileWhereInput
+  NOT: [PostImageWhereInput!]
+  OR: [PostImageWhereInput!]
+  Post: PostWhereInput
+  fileId: StringFilter
+  id: StringFilter
+  postId: StringFilter
+}
+
+input PostListRelationFilter {
+  every: PostWhereInput
+  none: PostWhereInput
+  some: PostWhereInput
+}
+
+input PostWhereInput {
+  AND: [PostWhereInput!]
+  Catalog: CatalogWhereInput
+  CreatedBy: UserWhereInput
+  NOT: [PostWhereInput!]
+  OR: [PostWhereInput!]
+  PostImages: PostImageListRelationFilter
+  createdAt: DateTimeFilter
+  createdById: StringFilter
+  description: StringNullableFilter
+  id: StringFilter
+  image: StringNullableFilter
+  title: StringFilter
+  updatedAt: DateTimeFilter
+  urlname: StringFilter
+}
+
 type Query {
+  """
+  Подраздел каталога
+  """
+  catalog(where: CatalogWhereUniqueInput!): Catalog
+
+  """
+  Подразделы каталога
+  """
+  catalogs(
+    cursor: CatalogWhereUniqueInput
+    orderBy: [CatalogOrderByInput!]
+    skip: Int
+    take: Int
+    where: CatalogWhereInput
+  ): [Catalog!]!
+
+  """
+  Раздел каталога
+  """
+  catalogtop(where: CatalogtopWhereUniqueInput!): Catalogtop
+
+  """
+  Список разделов каталога
+  """
+  catalogtops(
+    cursor: CatalogtopWhereUniqueInput
+    orderBy: [CatalogtopOrderByInput!]
+    skip: Int
+    take: Int
+    where: CatalogtopWhereInput
+  ): [Catalogtop!]!
+
   """
   Файл
   """
@@ -575,6 +734,7 @@ input UserOrderByInput {
   id: SortOrder
   image: SortOrder
   password: SortOrder
+  role: SortOrder
   showEmail: SortOrder
   showFullname: SortOrder
   sudo: SortOrder
@@ -609,6 +769,7 @@ input UserWhereInput {
   Letters: LetterListRelationFilter
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
+  Posts: PostListRelationFilter
   ResetPasswords: ResetPasswordListRelationFilter
   Tokens: TokenListRelationFilter
   active: BoolFilter
@@ -618,6 +779,7 @@ input UserWhereInput {
   id: StringFilter
   image: StringNullableFilter
   password: StringNullableFilter
+  role: EnumRoleFilter
   showEmail: BoolFilter
   showFullname: BoolFilter
   sudo: BoolFilter

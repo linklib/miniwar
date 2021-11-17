@@ -39,6 +39,72 @@ export interface BoolFilter {
   not?: Maybe<NestedBoolFilter>;
 }
 
+/** Пункт каталога */
+export interface Catalog {
+  __typename?: 'Catalog';
+  Catalogtop?: Maybe<Catalogtop>;
+  CatalogtopId?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  title: Scalars['String'];
+  urlname: Scalars['String'];
+}
+
+export interface CatalogListRelationFilter {
+  every?: Maybe<CatalogWhereInput>;
+  none?: Maybe<CatalogWhereInput>;
+  some?: Maybe<CatalogWhereInput>;
+}
+
+export interface CatalogOrderByInput {
+  CatalogtopId?: Maybe<SortOrder>;
+  id?: Maybe<SortOrder>;
+  postId?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+}
+
+export interface CatalogWhereInput {
+  AND?: Maybe<Array<CatalogWhereInput>>;
+  Catalogtop?: Maybe<CatalogtopWhereInput>;
+  CatalogtopId?: Maybe<StringFilter>;
+  NOT?: Maybe<Array<CatalogWhereInput>>;
+  OR?: Maybe<Array<CatalogWhereInput>>;
+  Post?: Maybe<PostWhereInput>;
+  id?: Maybe<StringFilter>;
+  postId?: Maybe<StringNullableFilter>;
+  title?: Maybe<StringFilter>;
+}
+
+export interface CatalogWhereUniqueInput {
+  id?: Maybe<Scalars['String']>;
+}
+
+/** Верхний уровень каталога */
+export interface Catalogtop {
+  __typename?: 'Catalogtop';
+  catalogs?: Maybe<Array<Catalog>>;
+  id: Scalars['String'];
+  title: Scalars['String'];
+  urlname: Scalars['String'];
+}
+
+export interface CatalogtopOrderByInput {
+  id?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+}
+
+export interface CatalogtopWhereInput {
+  AND?: Maybe<Array<CatalogtopWhereInput>>;
+  Catalogs?: Maybe<CatalogListRelationFilter>;
+  NOT?: Maybe<Array<CatalogtopWhereInput>>;
+  OR?: Maybe<Array<CatalogtopWhereInput>>;
+  id?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+}
+
+export interface CatalogtopWhereUniqueInput {
+  id?: Maybe<Scalars['String']>;
+}
+
 
 export interface DateTimeFilter {
   equals?: Maybe<Scalars['DateTime']>;
@@ -67,6 +133,13 @@ export interface EnumLetterStatusFilter {
   in?: Maybe<Array<LetterStatus>>;
   not?: Maybe<NestedEnumLetterStatusFilter>;
   notIn?: Maybe<Array<LetterStatus>>;
+}
+
+export interface EnumRoleFilter {
+  equals?: Maybe<Role>;
+  in?: Maybe<Array<Role>>;
+  not?: Maybe<NestedEnumRoleFilter>;
+  notIn?: Maybe<Array<Role>>;
 }
 
 /** Файл */
@@ -118,6 +191,7 @@ export interface FileWhereInput {
   CreatedBy?: Maybe<UserWhereInput>;
   NOT?: Maybe<Array<FileWhereInput>>;
   OR?: Maybe<Array<FileWhereInput>>;
+  PostImages?: Maybe<PostImageListRelationFilter>;
   createdAt?: Maybe<DateTimeFilter>;
   createdById?: Maybe<StringNullableFilter>;
   encoding?: Maybe<StringFilter>;
@@ -275,6 +349,13 @@ export interface NestedEnumLetterStatusFilter {
   notIn?: Maybe<Array<LetterStatus>>;
 }
 
+export interface NestedEnumRoleFilter {
+  equals?: Maybe<Role>;
+  in?: Maybe<Array<Role>>;
+  not?: Maybe<NestedEnumRoleFilter>;
+  notIn?: Maybe<Array<Role>>;
+}
+
 export interface NestedFloatFilter {
   equals?: Maybe<Scalars['Float']>;
   gt?: Maybe<Scalars['Float']>;
@@ -336,8 +417,55 @@ export interface NestedStringNullableFilter {
   startsWith?: Maybe<Scalars['String']>;
 }
 
+export interface PostImageListRelationFilter {
+  every?: Maybe<PostImageWhereInput>;
+  none?: Maybe<PostImageWhereInput>;
+  some?: Maybe<PostImageWhereInput>;
+}
+
+export interface PostImageWhereInput {
+  AND?: Maybe<Array<PostImageWhereInput>>;
+  File?: Maybe<FileWhereInput>;
+  NOT?: Maybe<Array<PostImageWhereInput>>;
+  OR?: Maybe<Array<PostImageWhereInput>>;
+  Post?: Maybe<PostWhereInput>;
+  fileId?: Maybe<StringFilter>;
+  id?: Maybe<StringFilter>;
+  postId?: Maybe<StringFilter>;
+}
+
+export interface PostListRelationFilter {
+  every?: Maybe<PostWhereInput>;
+  none?: Maybe<PostWhereInput>;
+  some?: Maybe<PostWhereInput>;
+}
+
+export interface PostWhereInput {
+  AND?: Maybe<Array<PostWhereInput>>;
+  Catalog?: Maybe<CatalogWhereInput>;
+  CreatedBy?: Maybe<UserWhereInput>;
+  NOT?: Maybe<Array<PostWhereInput>>;
+  OR?: Maybe<Array<PostWhereInput>>;
+  PostImages?: Maybe<PostImageListRelationFilter>;
+  createdAt?: Maybe<DateTimeFilter>;
+  createdById?: Maybe<StringFilter>;
+  description?: Maybe<StringNullableFilter>;
+  id?: Maybe<StringFilter>;
+  image?: Maybe<StringNullableFilter>;
+  title?: Maybe<StringFilter>;
+  updatedAt?: Maybe<DateTimeFilter>;
+}
+
 export interface Query {
   __typename?: 'Query';
+  /** Подраздел каталога */
+  catalog?: Maybe<Catalog>;
+  /** Подразделы каталога */
+  catalogs: Array<Catalog>;
+  /** Раздел каталога */
+  catalogtop?: Maybe<Catalogtop>;
+  /** Список разделов каталога */
+  catalogtops: Array<Catalogtop>;
   /** Файл */
   file?: Maybe<File>;
   /** Список файлов */
@@ -353,6 +481,34 @@ export interface Query {
   /** Количество пользователей */
   usersCount: Scalars['Int'];
 }
+
+
+export type QueryCatalogArgs = {
+  where: CatalogWhereUniqueInput;
+};
+
+
+export type QueryCatalogsArgs = {
+  cursor?: Maybe<CatalogWhereUniqueInput>;
+  orderBy?: Maybe<Array<CatalogOrderByInput>>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+  where?: Maybe<CatalogWhereInput>;
+};
+
+
+export type QueryCatalogtopArgs = {
+  where: CatalogtopWhereUniqueInput;
+};
+
+
+export type QueryCatalogtopsArgs = {
+  cursor?: Maybe<CatalogtopWhereUniqueInput>;
+  orderBy?: Maybe<Array<CatalogtopOrderByInput>>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+  where?: Maybe<CatalogtopWhereInput>;
+};
 
 
 export type QueryFileArgs = {
@@ -451,6 +607,11 @@ export interface ResetPasswordWhereUniqueInput {
   id?: Maybe<Scalars['ID']>;
 }
 
+export enum Role {
+  ADMIN = 'ADMIN',
+  USER = 'USER'
+}
+
 export interface SingleUploadInput {
   /** В какую директорю загружать файл */
   directory?: Maybe<Scalars['String']>;
@@ -541,6 +702,7 @@ export interface User {
   id: Scalars['String'];
   /** Avatar */
   image?: Maybe<Scalars['String']>;
+  role?: Maybe<Role>;
   /** Показывать емейл другим пользователям */
   showEmail: Scalars['Boolean'];
   /** Показывать ФИО другим пользователям */
@@ -559,6 +721,7 @@ export interface UserOrderByInput {
   id?: Maybe<SortOrder>;
   image?: Maybe<SortOrder>;
   password?: Maybe<SortOrder>;
+  role?: Maybe<SortOrder>;
   showEmail?: Maybe<SortOrder>;
   showFullname?: Maybe<SortOrder>;
   sudo?: Maybe<SortOrder>;
@@ -587,6 +750,7 @@ export interface UserWhereInput {
   Letters?: Maybe<LetterListRelationFilter>;
   NOT?: Maybe<Array<UserWhereInput>>;
   OR?: Maybe<Array<UserWhereInput>>;
+  Posts?: Maybe<PostListRelationFilter>;
   ResetPasswords?: Maybe<ResetPasswordListRelationFilter>;
   Tokens?: Maybe<TokenListRelationFilter>;
   active?: Maybe<BoolFilter>;
@@ -596,6 +760,7 @@ export interface UserWhereInput {
   id?: Maybe<StringFilter>;
   image?: Maybe<StringNullableFilter>;
   password?: Maybe<StringNullableFilter>;
+  role?: Maybe<EnumRoleFilter>;
   showEmail?: Maybe<BoolFilter>;
   showFullname?: Maybe<BoolFilter>;
   sudo?: Maybe<BoolFilter>;

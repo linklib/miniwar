@@ -1,5 +1,6 @@
 import { Prisma, PrismaClient } from '@prisma/client'
 import { createPassword } from '../server/nexus/types/User/resolvers'
+import { catalog } from './data'
 
 const prisma = new PrismaClient()
 
@@ -32,6 +33,18 @@ async function main() {
       })
       .catch(console.error)
   }
+
+  for (const c of catalog) {
+    await prisma.catalogtop
+      .create({
+        data: c,
+      })
+      .then((catalogtop) => {
+        // eslint-disable-next-line no-console
+        console.log(`Created catalogtop with id: ${catalogtop.id}`)
+      })
+  }
+
   // eslint-disable-next-line no-console
   console.log(`Seeding finished.`)
 }
