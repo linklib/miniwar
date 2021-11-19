@@ -60,6 +60,7 @@ export interface CatalogOrderByInput {
   id?: Maybe<SortOrder>;
   postId?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
+  urlname?: Maybe<SortOrder>;
 }
 
 export interface CatalogWhereInput {
@@ -72,6 +73,7 @@ export interface CatalogWhereInput {
   id?: Maybe<StringFilter>;
   postId?: Maybe<StringNullableFilter>;
   title?: Maybe<StringFilter>;
+  urlname?: Maybe<StringFilter>;
 }
 
 export interface CatalogWhereUniqueInput {
@@ -90,6 +92,7 @@ export interface Catalogtop {
 export interface CatalogtopOrderByInput {
   id?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
+  urlname?: Maybe<SortOrder>;
 }
 
 export interface CatalogtopWhereInput {
@@ -99,6 +102,7 @@ export interface CatalogtopWhereInput {
   OR?: Maybe<Array<CatalogtopWhereInput>>;
   id?: Maybe<StringFilter>;
   title?: Maybe<StringFilter>;
+  urlname?: Maybe<StringFilter>;
 }
 
 export interface CatalogtopWhereUniqueInput {
@@ -454,6 +458,7 @@ export interface PostWhereInput {
   image?: Maybe<StringNullableFilter>;
   title?: Maybe<StringFilter>;
   updatedAt?: Maybe<DateTimeFilter>;
+  urlname?: Maybe<StringFilter>;
 }
 
 export interface Query {
