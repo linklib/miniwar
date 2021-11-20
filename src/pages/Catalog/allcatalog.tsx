@@ -28,7 +28,14 @@ export const CatalogsPage: Page = () => {
         {catalogtops.map((c) => {
           return (
             <li key={c.id}>
-              <Link href={`/catalog/${c.urlname}`}>{c.title}</Link>
+              <Link
+                href={{
+                  pathname: `/catalog/${c.urlname}`,
+                  query: { title: c.title },
+                }}
+              >
+                {c.title}
+              </Link>
             </li>
           )
         })}

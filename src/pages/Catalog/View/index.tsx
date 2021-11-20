@@ -2,15 +2,19 @@ import React from 'react'
 import { NextSeo } from 'next-seo'
 import Link from 'next/link'
 import { CatalogsPageViewProps } from './interfaces'
+import { useRouter } from 'next/router'
 
 export const CatalogsPageView: React.FC<CatalogsPageViewProps> = ({
   catalogs,
 }) => {
-  //console.log('catalogs', catalogs)
+  const router = useRouter()
+  const { title } = router.query
+
+  //console.log('title', router.title)
 
   return (
     <>
-      <NextSeo title="Каталог" />
+      <NextSeo title={title as string} />
       <ul>
         {catalogs.map((c) => {
           return (
