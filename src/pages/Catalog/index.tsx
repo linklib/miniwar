@@ -7,7 +7,10 @@ import { CatalogsPageView } from './View'
 
 export const CatalogsPage: Page = () => {
   const router = useRouter()
-  const { urlname } = router.query
+  //const { urlname } = router.query
+
+  const urlname =
+    typeof router.query.urlname === 'string' ? router.query.urlname : undefined
 
   const data = useCatalogsQuery({
     query: CatalogsDocument,
@@ -15,7 +18,7 @@ export const CatalogsPage: Page = () => {
       where: {
         Catalogtop: {
           urlname: {
-            equals: urlname as string,
+            equals: urlname,
           },
         },
       },

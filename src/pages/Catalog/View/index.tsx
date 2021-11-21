@@ -8,13 +8,16 @@ export const CatalogsPageView: React.FC<CatalogsPageViewProps> = ({
   catalogs,
 }) => {
   const router = useRouter()
-  const { title } = router.query
+  //const { title } = router.query
+
+  const title =
+    typeof router.query.title === 'string' ? router.query.title : undefined
 
   //console.log('title', router.title)
 
   return (
     <>
-      <NextSeo title={title as string} />
+      <NextSeo title={title} />
       <ul>
         {catalogs.map((c) => {
           return (
