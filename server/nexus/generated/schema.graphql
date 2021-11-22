@@ -259,6 +259,13 @@ input IntNullableFilter {
 
 scalar JSON
 
+scalar Json
+
+input JsonNullableFilter {
+  equals: Json
+  not: Json
+}
+
 input LetterListRelationFilter {
   every: LetterWhereInput
   none: LetterWhereInput
@@ -293,6 +300,7 @@ input LetterWhereInput {
 }
 
 type Mutation {
+  createPost(data: PostCreateInput!): Post!
   createResetPasswordProcessor(
     where: UserWhereUniqueInput!
   ): ResetPasswordResponse!
@@ -319,6 +327,7 @@ type Mutation {
     """
     file: Upload
   ): File
+  updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post!
 }
 
 input NestedBoolFilter {
@@ -423,10 +432,58 @@ input NestedStringNullableFilter {
   startsWith: String
 }
 
+"""
+Пост
+"""
+type Post {
+  CreatedBy: User
+  catalog: [Catalog!]
+  content: JSON
+
+  """
+  Когда создан
+  """
+  createdAt: DateTime!
+  createdById: ID!
+  description: String
+  id: String!
+  image: String
+  title: String!
+
+  """
+  Когда обновлен
+  """
+  updatedAt: DateTime!
+  urlname: String
+}
+
+input PostCreateInput {
+  content: JSON
+  description: String
+  image: String
+  title: String!
+  urlname: String
+}
+
+"""
+Картинка
+"""
+type PostImage {
+  fileId: ID!
+  id: String!
+  postId: ID!
+}
+
 input PostImageListRelationFilter {
   every: PostImageWhereInput
   none: PostImageWhereInput
   some: PostImageWhereInput
+}
+
+input PostImageOrderByInput {
+  fileId: SortOrder
+  id: SortOrder
+  postId: SortOrder
 }
 
 input PostImageWhereInput {
@@ -440,10 +497,34 @@ input PostImageWhereInput {
   postId: StringFilter
 }
 
+input PostImageWhereUniqueInput {
+  id: String
+}
+
 input PostListRelationFilter {
   every: PostWhereInput
   none: PostWhereInput
   some: PostWhereInput
+}
+
+input PostOrderByInput {
+  content: SortOrder
+  createdAt: SortOrder
+  createdById: SortOrder
+  description: SortOrder
+  id: SortOrder
+  image: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+  urlname: SortOrder
+}
+
+input PostUpdateInput {
+  content: JSON
+  description: String
+  image: String
+  title: String!
+  urlname: String
 }
 
 input PostWhereInput {
@@ -453,6 +534,7 @@ input PostWhereInput {
   NOT: [PostWhereInput!]
   OR: [PostWhereInput!]
   PostImages: PostImageListRelationFilter
+  content: JsonNullableFilter
   createdAt: DateTimeFilter
   createdById: StringFilter
   description: StringNullableFilter
@@ -461,6 +543,10 @@ input PostWhereInput {
   title: StringFilter
   updatedAt: DateTimeFilter
   urlname: StringFilter
+}
+
+input PostWhereUniqueInput {
+  id: String
 }
 
 type Query {
@@ -517,6 +603,38 @@ type Query {
   """
   filesCount(where: FileWhereInput): Int!
   me: User
+
+  """
+  Пост
+  """
+  post(where: PostWhereUniqueInput!): Post
+
+  """
+  Картинка поста
+  """
+  postImage(where: PostImageWhereUniqueInput!): PostImage
+
+  """
+  Список картинок
+  """
+  postImages(
+    cursor: PostImageWhereUniqueInput
+    orderBy: [PostImageOrderByInput!]
+    skip: Int
+    take: Int
+    where: PostImageWhereInput
+  ): [PostImage!]!
+
+  """
+  Список постов
+  """
+  posts(
+    cursor: PostWhereUniqueInput
+    orderBy: [PostOrderByInput!]
+    skip: Int
+    take: Int
+    where: PostWhereInput
+  ): [Post!]!
   tokens(
     cursor: TokenWhereUniqueInput
     orderBy: [TokenOrderByInput!]

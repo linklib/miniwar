@@ -9,7 +9,7 @@ type Pagination = {
 }
 
 // Prisma custom scalar names
-type CustomScalars = 'DateTime'
+type CustomScalars = 'DateTime' | 'Json'
 
 // Prisma model type definitions
 interface PrismaModels {
@@ -53,8 +53,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'createdAt' | 'updatedAt' | 'code' | 'password' | 'validTill' | 'User'
     }
     posts: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'createdAt' | 'updatedAt' | 'title' | 'urlname' | 'description' | 'image' | 'createdById' | 'CreatedBy' | 'PostImages' | 'Catalog'
-      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'urlname' | 'description' | 'image' | 'createdById'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'createdAt' | 'updatedAt' | 'title' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'CreatedBy' | 'PostImages' | 'Catalog'
+      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'urlname' | 'description' | 'image' | 'content' | 'createdById'
     }
     postImages: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'postId' | 'Post' | 'fileId' | 'File'
@@ -87,8 +87,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'createdAt' | 'updatedAt' | 'code' | 'password' | 'validTill' | 'User'
     }
     Posts: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'createdAt' | 'updatedAt' | 'title' | 'urlname' | 'description' | 'image' | 'createdById' | 'CreatedBy' | 'PostImages' | 'Catalog'
-      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'urlname' | 'description' | 'image' | 'createdById'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'createdAt' | 'updatedAt' | 'title' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'CreatedBy' | 'PostImages' | 'Catalog'
+      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'urlname' | 'description' | 'image' | 'content' | 'createdById'
     }
   }
   Token: {
@@ -300,6 +300,7 @@ interface NexusPrismaOutputs {
     urlname: 'String'
     description: 'String'
     image: 'String'
+    content: 'Json'
     createdById: 'String'
     CreatedBy: 'User'
     PostImages: 'PostImage'

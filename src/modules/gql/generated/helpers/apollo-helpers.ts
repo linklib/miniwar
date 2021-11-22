@@ -35,15 +35,31 @@ export type FileFieldPolicy = {
 	size?: FieldPolicy<any> | FieldReadFunction<any>,
 	updatedAt?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type MutationKeySpecifier = ('createResetPasswordProcessor' | 'resetPasswordProcessor' | 'signin' | 'signup' | 'singleUpload' | MutationKeySpecifier)[];
+export type MutationKeySpecifier = ('createPost' | 'createResetPasswordProcessor' | 'resetPasswordProcessor' | 'signin' | 'signup' | 'singleUpload' | 'updatePost' | MutationKeySpecifier)[];
 export type MutationFieldPolicy = {
+	createPost?: FieldPolicy<any> | FieldReadFunction<any>,
 	createResetPasswordProcessor?: FieldPolicy<any> | FieldReadFunction<any>,
 	resetPasswordProcessor?: FieldPolicy<any> | FieldReadFunction<any>,
 	signin?: FieldPolicy<any> | FieldReadFunction<any>,
 	signup?: FieldPolicy<any> | FieldReadFunction<any>,
-	singleUpload?: FieldPolicy<any> | FieldReadFunction<any>
+	singleUpload?: FieldPolicy<any> | FieldReadFunction<any>,
+	updatePost?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type QueryKeySpecifier = ('catalog' | 'catalogs' | 'catalogtop' | 'catalogtops' | 'file' | 'files' | 'filesCount' | 'me' | 'tokens' | 'user' | 'users' | 'usersCount' | QueryKeySpecifier)[];
+export type PostKeySpecifier = ('CreatedBy' | 'catalog' | 'content' | 'createdAt' | 'createdById' | 'description' | 'id' | 'image' | 'title' | 'updatedAt' | 'urlname' | PostKeySpecifier)[];
+export type PostFieldPolicy = {
+	CreatedBy?: FieldPolicy<any> | FieldReadFunction<any>,
+	catalog?: FieldPolicy<any> | FieldReadFunction<any>,
+	content?: FieldPolicy<any> | FieldReadFunction<any>,
+	createdAt?: FieldPolicy<any> | FieldReadFunction<any>,
+	createdById?: FieldPolicy<any> | FieldReadFunction<any>,
+	description?: FieldPolicy<any> | FieldReadFunction<any>,
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	image?: FieldPolicy<any> | FieldReadFunction<any>,
+	title?: FieldPolicy<any> | FieldReadFunction<any>,
+	updatedAt?: FieldPolicy<any> | FieldReadFunction<any>,
+	urlname?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type QueryKeySpecifier = ('catalog' | 'catalogs' | 'catalogtop' | 'catalogtops' | 'file' | 'files' | 'filesCount' | 'me' | 'post' | 'posts' | 'tokens' | 'user' | 'users' | 'usersCount' | QueryKeySpecifier)[];
 export type QueryFieldPolicy = {
 	catalog?: FieldPolicy<any> | FieldReadFunction<any>,
 	catalogs?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -53,6 +69,8 @@ export type QueryFieldPolicy = {
 	files?: FieldPolicy<any> | FieldReadFunction<any>,
 	filesCount?: FieldPolicy<any> | FieldReadFunction<any>,
 	me?: FieldPolicy<any> | FieldReadFunction<any>,
+	post?: FieldPolicy<any> | FieldReadFunction<any>,
+	posts?: FieldPolicy<any> | FieldReadFunction<any>,
 	tokens?: FieldPolicy<any> | FieldReadFunction<any>,
 	user?: FieldPolicy<any> | FieldReadFunction<any>,
 	users?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -118,6 +136,10 @@ export type TypedTypePolicies = TypePolicies & {
 	Mutation?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | MutationKeySpecifier | (() => undefined | MutationKeySpecifier),
 		fields?: MutationFieldPolicy,
+	},
+	Post?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | PostKeySpecifier | (() => undefined | PostKeySpecifier),
+		fields?: PostFieldPolicy,
 	},
 	Query?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | QueryKeySpecifier | (() => undefined | QueryKeySpecifier),

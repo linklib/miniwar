@@ -20,6 +20,7 @@ export type Scalars = {
   /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   DateTime: globalThis.Date;
   JSON: any;
+  Json: globalThis.Record<string, any> | globalThis.Array<any>;
   /** desc */
   Upload: globalThis.File;
 };
@@ -247,6 +248,12 @@ export interface IntNullableFilter {
 }
 
 
+
+export interface JsonNullableFilter {
+  equals?: Maybe<Scalars['Json']>;
+  not?: Maybe<Scalars['Json']>;
+}
+
 export interface LetterListRelationFilter {
   every?: Maybe<LetterWhereInput>;
   none?: Maybe<LetterWhereInput>;
@@ -282,6 +289,7 @@ export interface LetterWhereInput {
 
 export interface Mutation {
   __typename?: 'Mutation';
+  createPost: Post;
   createResetPasswordProcessor: ResetPasswordResponse;
   resetPasswordProcessor: AuthPayload;
   /** Авторизация */
@@ -290,7 +298,13 @@ export interface Mutation {
   signup: AuthPayload;
   /** Загрузка файла */
   singleUpload?: Maybe<File>;
+  updatePost: Post;
 }
+
+
+export type MutationCreatePostArgs = {
+  data: PostCreateInput;
+};
 
 
 export type MutationCreateResetPasswordProcessorArgs = {
@@ -317,6 +331,12 @@ export type MutationSignupArgs = {
 export type MutationSingleUploadArgs = {
   data?: Maybe<SingleUploadInput>;
   file?: Maybe<Scalars['Upload']>;
+};
+
+
+export type MutationUpdatePostArgs = {
+  data: PostUpdateInput;
+  where: PostWhereUniqueInput;
 };
 
 export interface NestedBoolFilter {
@@ -421,6 +441,32 @@ export interface NestedStringNullableFilter {
   startsWith?: Maybe<Scalars['String']>;
 }
 
+/** Пост */
+export interface Post {
+  __typename?: 'Post';
+  CreatedBy?: Maybe<User>;
+  catalog?: Maybe<Array<Catalog>>;
+  content?: Maybe<Scalars['JSON']>;
+  /** Когда создан */
+  createdAt: Scalars['DateTime'];
+  createdById: Scalars['ID'];
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  image?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+  /** Когда обновлен */
+  updatedAt: Scalars['DateTime'];
+  urlname?: Maybe<Scalars['String']>;
+}
+
+export interface PostCreateInput {
+  content?: Maybe<Scalars['JSON']>;
+  description?: Maybe<Scalars['String']>;
+  image?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+  urlname?: Maybe<Scalars['String']>;
+}
+
 export interface PostImageListRelationFilter {
   every?: Maybe<PostImageWhereInput>;
   none?: Maybe<PostImageWhereInput>;
@@ -444,6 +490,26 @@ export interface PostListRelationFilter {
   some?: Maybe<PostWhereInput>;
 }
 
+export interface PostOrderByInput {
+  content?: Maybe<SortOrder>;
+  createdAt?: Maybe<SortOrder>;
+  createdById?: Maybe<SortOrder>;
+  description?: Maybe<SortOrder>;
+  id?: Maybe<SortOrder>;
+  image?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  updatedAt?: Maybe<SortOrder>;
+  urlname?: Maybe<SortOrder>;
+}
+
+export interface PostUpdateInput {
+  content?: Maybe<Scalars['JSON']>;
+  description?: Maybe<Scalars['String']>;
+  image?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+  urlname?: Maybe<Scalars['String']>;
+}
+
 export interface PostWhereInput {
   AND?: Maybe<Array<PostWhereInput>>;
   Catalog?: Maybe<CatalogWhereInput>;
@@ -451,6 +517,7 @@ export interface PostWhereInput {
   NOT?: Maybe<Array<PostWhereInput>>;
   OR?: Maybe<Array<PostWhereInput>>;
   PostImages?: Maybe<PostImageListRelationFilter>;
+  content?: Maybe<JsonNullableFilter>;
   createdAt?: Maybe<DateTimeFilter>;
   createdById?: Maybe<StringFilter>;
   description?: Maybe<StringNullableFilter>;
@@ -459,6 +526,10 @@ export interface PostWhereInput {
   title?: Maybe<StringFilter>;
   updatedAt?: Maybe<DateTimeFilter>;
   urlname?: Maybe<StringFilter>;
+}
+
+export interface PostWhereUniqueInput {
+  id?: Maybe<Scalars['String']>;
 }
 
 export interface Query {
@@ -478,6 +549,10 @@ export interface Query {
   /** Количество файлов */
   filesCount: Scalars['Int'];
   me?: Maybe<User>;
+  /** Пост */
+  post?: Maybe<Post>;
+  /** Список постов */
+  posts: Array<Post>;
   tokens: Array<Token>;
   /** Пользователь */
   user?: Maybe<User>;
@@ -532,6 +607,20 @@ export type QueryFilesArgs = {
 
 export type QueryFilesCountArgs = {
   where?: Maybe<FileWhereInput>;
+};
+
+
+export type QueryPostArgs = {
+  where: PostWhereUniqueInput;
+};
+
+
+export type QueryPostsArgs = {
+  cursor?: Maybe<PostWhereUniqueInput>;
+  orderBy?: Maybe<Array<PostOrderByInput>>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+  where?: Maybe<PostWhereInput>;
 };
 
 

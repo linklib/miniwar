@@ -11,6 +11,8 @@ import type {
   Token,
   Catalogtop,
   Catalog,
+  Post,
+  PostImage,
 } from '@prisma/client'
 import type { core } from 'nexus'
 declare global {
@@ -229,6 +231,11 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedIntNullableFilter'] | null // NestedIntNullableFilter
     notIn?: number[] | null // [Int!]
   }
+  JsonNullableFilter: {
+    // input type
+    equals?: NexusGenScalars['Json'] | null // Json
+    not?: NexusGenScalars['Json'] | null // Json
+  }
   LetterListRelationFilter: {
     // input type
     every?: NexusGenInputs['LetterWhereInput'] | null // LetterWhereInput
@@ -357,11 +364,25 @@ export interface NexusGenInputs {
     notIn?: string[] | null // [String!]
     startsWith?: string | null // String
   }
+  PostCreateInput: {
+    // input type
+    content?: NexusGenScalars['JSON'] | null // JSON
+    description?: string | null // String
+    image?: string | null // String
+    title: string // String!
+    urlname?: string | null // String
+  }
   PostImageListRelationFilter: {
     // input type
     every?: NexusGenInputs['PostImageWhereInput'] | null // PostImageWhereInput
     none?: NexusGenInputs['PostImageWhereInput'] | null // PostImageWhereInput
     some?: NexusGenInputs['PostImageWhereInput'] | null // PostImageWhereInput
+  }
+  PostImageOrderByInput: {
+    // input type
+    fileId?: NexusGenEnums['SortOrder'] | null // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null // SortOrder
+    postId?: NexusGenEnums['SortOrder'] | null // SortOrder
   }
   PostImageWhereInput: {
     // input type
@@ -374,11 +395,35 @@ export interface NexusGenInputs {
     id?: NexusGenInputs['StringFilter'] | null // StringFilter
     postId?: NexusGenInputs['StringFilter'] | null // StringFilter
   }
+  PostImageWhereUniqueInput: {
+    // input type
+    id?: string | null // String
+  }
   PostListRelationFilter: {
     // input type
     every?: NexusGenInputs['PostWhereInput'] | null // PostWhereInput
     none?: NexusGenInputs['PostWhereInput'] | null // PostWhereInput
     some?: NexusGenInputs['PostWhereInput'] | null // PostWhereInput
+  }
+  PostOrderByInput: {
+    // input type
+    content?: NexusGenEnums['SortOrder'] | null // SortOrder
+    createdAt?: NexusGenEnums['SortOrder'] | null // SortOrder
+    createdById?: NexusGenEnums['SortOrder'] | null // SortOrder
+    description?: NexusGenEnums['SortOrder'] | null // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null // SortOrder
+    image?: NexusGenEnums['SortOrder'] | null // SortOrder
+    title?: NexusGenEnums['SortOrder'] | null // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null // SortOrder
+    urlname?: NexusGenEnums['SortOrder'] | null // SortOrder
+  }
+  PostUpdateInput: {
+    // input type
+    content?: NexusGenScalars['JSON'] | null // JSON
+    description?: string | null // String
+    image?: string | null // String
+    title: string // String!
+    urlname?: string | null // String
   }
   PostWhereInput: {
     // input type
@@ -388,6 +433,7 @@ export interface NexusGenInputs {
     NOT?: NexusGenInputs['PostWhereInput'][] | null // [PostWhereInput!]
     OR?: NexusGenInputs['PostWhereInput'][] | null // [PostWhereInput!]
     PostImages?: NexusGenInputs['PostImageListRelationFilter'] | null // PostImageListRelationFilter
+    content?: NexusGenInputs['JsonNullableFilter'] | null // JsonNullableFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null // DateTimeFilter
     createdById?: NexusGenInputs['StringFilter'] | null // StringFilter
     description?: NexusGenInputs['StringNullableFilter'] | null // StringNullableFilter
@@ -396,6 +442,10 @@ export interface NexusGenInputs {
     title?: NexusGenInputs['StringFilter'] | null // StringFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null // DateTimeFilter
     urlname?: NexusGenInputs['StringFilter'] | null // StringFilter
+  }
+  PostWhereUniqueInput: {
+    // input type
+    id?: string | null // String
   }
   ResetPasswordListRelationFilter: {
     // input type
@@ -563,6 +613,7 @@ export interface NexusGenScalars {
   ID: string
   DateTime: Date
   JSON: any
+  Json: any
   Upload: any
 }
 
@@ -579,6 +630,8 @@ export interface NexusGenObjects {
   Catalogtop: Catalogtop
   File: File
   Mutation: {}
+  Post: Post
+  PostImage: PostImage
   Query: {}
   RequestError: {
     // root type
@@ -646,11 +699,33 @@ export interface NexusGenFieldTypes {
   }
   Mutation: {
     // field return type
+    createPost: NexusGenRootTypes['Post'] // Post!
     createResetPasswordProcessor: NexusGenRootTypes['ResetPasswordResponse'] // ResetPasswordResponse!
     resetPasswordProcessor: NexusGenRootTypes['AuthPayload'] // AuthPayload!
     signin: NexusGenRootTypes['AuthPayload'] // AuthPayload!
     signup: NexusGenRootTypes['AuthPayload'] // AuthPayload!
     singleUpload: NexusGenRootTypes['File'] | null // File
+    updatePost: NexusGenRootTypes['Post'] // Post!
+  }
+  Post: {
+    // field return type
+    CreatedBy: NexusGenRootTypes['User'] | null // User
+    catalog: NexusGenRootTypes['Catalog'][] | null // [Catalog!]
+    content: NexusGenScalars['JSON'] | null // JSON
+    createdAt: NexusGenScalars['DateTime'] // DateTime!
+    createdById: string // ID!
+    description: string | null // String
+    id: string // String!
+    image: string | null // String
+    title: string // String!
+    updatedAt: NexusGenScalars['DateTime'] // DateTime!
+    urlname: string | null // String
+  }
+  PostImage: {
+    // field return type
+    fileId: string // ID!
+    id: string // String!
+    postId: string // ID!
   }
   Query: {
     // field return type
@@ -662,6 +737,10 @@ export interface NexusGenFieldTypes {
     files: NexusGenRootTypes['File'][] // [File!]!
     filesCount: number // Int!
     me: NexusGenRootTypes['User'] | null // User
+    post: NexusGenRootTypes['Post'] | null // Post
+    postImage: NexusGenRootTypes['PostImage'] | null // PostImage
+    postImages: NexusGenRootTypes['PostImage'][] // [PostImage!]!
+    posts: NexusGenRootTypes['Post'][] // [Post!]!
     tokens: NexusGenRootTypes['Token'][] // [Token!]!
     user: NexusGenRootTypes['User'] | null // User
     users: NexusGenRootTypes['User'][] // [User!]!
@@ -748,11 +827,33 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: {
     // field return type name
+    createPost: 'Post'
     createResetPasswordProcessor: 'ResetPasswordResponse'
     resetPasswordProcessor: 'AuthPayload'
     signin: 'AuthPayload'
     signup: 'AuthPayload'
     singleUpload: 'File'
+    updatePost: 'Post'
+  }
+  Post: {
+    // field return type name
+    CreatedBy: 'User'
+    catalog: 'Catalog'
+    content: 'JSON'
+    createdAt: 'DateTime'
+    createdById: 'ID'
+    description: 'String'
+    id: 'String'
+    image: 'String'
+    title: 'String'
+    updatedAt: 'DateTime'
+    urlname: 'String'
+  }
+  PostImage: {
+    // field return type name
+    fileId: 'ID'
+    id: 'String'
+    postId: 'ID'
   }
   Query: {
     // field return type name
@@ -764,6 +865,10 @@ export interface NexusGenFieldTypeNames {
     files: 'File'
     filesCount: 'Int'
     me: 'User'
+    post: 'Post'
+    postImage: 'PostImage'
+    postImages: 'PostImage'
+    posts: 'Post'
     tokens: 'Token'
     user: 'User'
     users: 'User'
@@ -813,6 +918,10 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    createPost: {
+      // args
+      data: NexusGenInputs['PostCreateInput'] // PostCreateInput!
+    }
     createResetPasswordProcessor: {
       // args
       where: NexusGenInputs['UserWhereUniqueInput'] // UserWhereUniqueInput!
@@ -834,6 +943,11 @@ export interface NexusGenArgTypes {
       // args
       data?: NexusGenInputs['SingleUploadInput'] | null // SingleUploadInput
       file?: NexusGenScalars['Upload'] | null // Upload
+    }
+    updatePost: {
+      // args
+      data: NexusGenInputs['PostUpdateInput'] // PostUpdateInput!
+      where: NexusGenInputs['PostWhereUniqueInput'] // PostWhereUniqueInput!
     }
   }
   Query: {
@@ -876,6 +990,30 @@ export interface NexusGenArgTypes {
     filesCount: {
       // args
       where?: NexusGenInputs['FileWhereInput'] | null // FileWhereInput
+    }
+    post: {
+      // args
+      where: NexusGenInputs['PostWhereUniqueInput'] // PostWhereUniqueInput!
+    }
+    postImage: {
+      // args
+      where: NexusGenInputs['PostImageWhereUniqueInput'] // PostImageWhereUniqueInput!
+    }
+    postImages: {
+      // args
+      cursor?: NexusGenInputs['PostImageWhereUniqueInput'] | null // PostImageWhereUniqueInput
+      orderBy?: NexusGenInputs['PostImageOrderByInput'][] | null // [PostImageOrderByInput!]
+      skip?: number | null // Int
+      take?: number | null // Int
+      where?: NexusGenInputs['PostImageWhereInput'] | null // PostImageWhereInput
+    }
+    posts: {
+      // args
+      cursor?: NexusGenInputs['PostWhereUniqueInput'] | null // PostWhereUniqueInput
+      orderBy?: NexusGenInputs['PostOrderByInput'][] | null // [PostOrderByInput!]
+      skip?: number | null // Int
+      take?: number | null // Int
+      where?: NexusGenInputs['PostWhereInput'] | null // PostWhereInput
     }
     tokens: {
       // args
