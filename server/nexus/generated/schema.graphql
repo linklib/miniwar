@@ -37,7 +37,6 @@ input CatalogListRelationFilter {
 input CatalogOrderByInput {
   CatalogtopId: SortOrder
   id: SortOrder
-  postId: SortOrder
   title: SortOrder
   urlname: SortOrder
 }
@@ -48,9 +47,8 @@ input CatalogWhereInput {
   CatalogtopId: StringFilter
   NOT: [CatalogWhereInput!]
   OR: [CatalogWhereInput!]
-  Post: PostWhereInput
+  Posts: PostListRelationFilter
   id: StringFilter
-  postId: StringNullableFilter
   title: StringFilter
   urlname: StringFilter
 }
@@ -436,8 +434,9 @@ input NestedStringNullableFilter {
 Пост
 """
 type Post {
+  Catalog: Catalog
   CreatedBy: User
-  catalog: [Catalog!]
+  catalogId: ID!
   content: JSON
 
   """
@@ -448,6 +447,7 @@ type Post {
   description: String
   id: String!
   image: String
+  postimages: [PostImage!]
   title: String!
 
   """
@@ -458,6 +458,7 @@ type Post {
 }
 
 input PostCreateInput {
+  catalogId: String
   content: JSON
   description: String
   image: String
@@ -508,6 +509,7 @@ input PostListRelationFilter {
 }
 
 input PostOrderByInput {
+  catalogId: SortOrder
   content: SortOrder
   createdAt: SortOrder
   createdById: SortOrder
@@ -520,6 +522,7 @@ input PostOrderByInput {
 }
 
 input PostUpdateInput {
+  catalogId: String
   content: JSON
   description: String
   image: String
@@ -534,6 +537,7 @@ input PostWhereInput {
   NOT: [PostWhereInput!]
   OR: [PostWhereInput!]
   PostImages: PostImageListRelationFilter
+  catalogId: StringFilter
   content: JsonNullableFilter
   createdAt: DateTimeFilter
   createdById: StringFilter

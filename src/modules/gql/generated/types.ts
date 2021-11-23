@@ -59,7 +59,6 @@ export interface CatalogListRelationFilter {
 export interface CatalogOrderByInput {
   CatalogtopId?: Maybe<SortOrder>;
   id?: Maybe<SortOrder>;
-  postId?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
   urlname?: Maybe<SortOrder>;
 }
@@ -70,9 +69,8 @@ export interface CatalogWhereInput {
   CatalogtopId?: Maybe<StringFilter>;
   NOT?: Maybe<Array<CatalogWhereInput>>;
   OR?: Maybe<Array<CatalogWhereInput>>;
-  Post?: Maybe<PostWhereInput>;
+  Posts?: Maybe<PostListRelationFilter>;
   id?: Maybe<StringFilter>;
-  postId?: Maybe<StringNullableFilter>;
   title?: Maybe<StringFilter>;
   urlname?: Maybe<StringFilter>;
 }
@@ -444,8 +442,9 @@ export interface NestedStringNullableFilter {
 /** Пост */
 export interface Post {
   __typename?: 'Post';
+  Catalog?: Maybe<Catalog>;
   CreatedBy?: Maybe<User>;
-  catalog?: Maybe<Array<Catalog>>;
+  catalogId: Scalars['ID'];
   content?: Maybe<Scalars['JSON']>;
   /** Когда создан */
   createdAt: Scalars['DateTime'];
@@ -453,6 +452,7 @@ export interface Post {
   description?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   image?: Maybe<Scalars['String']>;
+  postimages?: Maybe<Array<PostImage>>;
   title: Scalars['String'];
   /** Когда обновлен */
   updatedAt: Scalars['DateTime'];
@@ -460,6 +460,7 @@ export interface Post {
 }
 
 export interface PostCreateInput {
+  catalogId?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['JSON']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
@@ -467,10 +468,24 @@ export interface PostCreateInput {
   urlname?: Maybe<Scalars['String']>;
 }
 
+/** Картинка */
+export interface PostImage {
+  __typename?: 'PostImage';
+  fileId: Scalars['ID'];
+  id: Scalars['String'];
+  postId: Scalars['ID'];
+}
+
 export interface PostImageListRelationFilter {
   every?: Maybe<PostImageWhereInput>;
   none?: Maybe<PostImageWhereInput>;
   some?: Maybe<PostImageWhereInput>;
+}
+
+export interface PostImageOrderByInput {
+  fileId?: Maybe<SortOrder>;
+  id?: Maybe<SortOrder>;
+  postId?: Maybe<SortOrder>;
 }
 
 export interface PostImageWhereInput {
@@ -484,6 +499,10 @@ export interface PostImageWhereInput {
   postId?: Maybe<StringFilter>;
 }
 
+export interface PostImageWhereUniqueInput {
+  id?: Maybe<Scalars['String']>;
+}
+
 export interface PostListRelationFilter {
   every?: Maybe<PostWhereInput>;
   none?: Maybe<PostWhereInput>;
@@ -491,6 +510,7 @@ export interface PostListRelationFilter {
 }
 
 export interface PostOrderByInput {
+  catalogId?: Maybe<SortOrder>;
   content?: Maybe<SortOrder>;
   createdAt?: Maybe<SortOrder>;
   createdById?: Maybe<SortOrder>;
@@ -503,6 +523,7 @@ export interface PostOrderByInput {
 }
 
 export interface PostUpdateInput {
+  catalogId?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['JSON']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
@@ -517,6 +538,7 @@ export interface PostWhereInput {
   NOT?: Maybe<Array<PostWhereInput>>;
   OR?: Maybe<Array<PostWhereInput>>;
   PostImages?: Maybe<PostImageListRelationFilter>;
+  catalogId?: Maybe<StringFilter>;
   content?: Maybe<JsonNullableFilter>;
   createdAt?: Maybe<DateTimeFilter>;
   createdById?: Maybe<StringFilter>;
@@ -551,6 +573,10 @@ export interface Query {
   me?: Maybe<User>;
   /** Пост */
   post?: Maybe<Post>;
+  /** Картинка поста */
+  postImage?: Maybe<PostImage>;
+  /** Список картинок */
+  postImages: Array<PostImage>;
   /** Список постов */
   posts: Array<Post>;
   tokens: Array<Token>;
@@ -612,6 +638,20 @@ export type QueryFilesCountArgs = {
 
 export type QueryPostArgs = {
   where: PostWhereUniqueInput;
+};
+
+
+export type QueryPostImageArgs = {
+  where: PostImageWhereUniqueInput;
+};
+
+
+export type QueryPostImagesArgs = {
+  cursor?: Maybe<PostImageWhereUniqueInput>;
+  orderBy?: Maybe<Array<PostImageOrderByInput>>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+  where?: Maybe<PostImageWhereInput>;
 };
 
 

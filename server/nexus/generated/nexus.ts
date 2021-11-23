@@ -78,7 +78,6 @@ export interface NexusGenInputs {
     // input type
     CatalogtopId?: NexusGenEnums['SortOrder'] | null // SortOrder
     id?: NexusGenEnums['SortOrder'] | null // SortOrder
-    postId?: NexusGenEnums['SortOrder'] | null // SortOrder
     title?: NexusGenEnums['SortOrder'] | null // SortOrder
     urlname?: NexusGenEnums['SortOrder'] | null // SortOrder
   }
@@ -89,9 +88,8 @@ export interface NexusGenInputs {
     CatalogtopId?: NexusGenInputs['StringFilter'] | null // StringFilter
     NOT?: NexusGenInputs['CatalogWhereInput'][] | null // [CatalogWhereInput!]
     OR?: NexusGenInputs['CatalogWhereInput'][] | null // [CatalogWhereInput!]
-    Post?: NexusGenInputs['PostWhereInput'] | null // PostWhereInput
+    Posts?: NexusGenInputs['PostListRelationFilter'] | null // PostListRelationFilter
     id?: NexusGenInputs['StringFilter'] | null // StringFilter
-    postId?: NexusGenInputs['StringNullableFilter'] | null // StringNullableFilter
     title?: NexusGenInputs['StringFilter'] | null // StringFilter
     urlname?: NexusGenInputs['StringFilter'] | null // StringFilter
   }
@@ -366,6 +364,7 @@ export interface NexusGenInputs {
   }
   PostCreateInput: {
     // input type
+    catalogId?: string | null // String
     content?: NexusGenScalars['JSON'] | null // JSON
     description?: string | null // String
     image?: string | null // String
@@ -407,6 +406,7 @@ export interface NexusGenInputs {
   }
   PostOrderByInput: {
     // input type
+    catalogId?: NexusGenEnums['SortOrder'] | null // SortOrder
     content?: NexusGenEnums['SortOrder'] | null // SortOrder
     createdAt?: NexusGenEnums['SortOrder'] | null // SortOrder
     createdById?: NexusGenEnums['SortOrder'] | null // SortOrder
@@ -419,6 +419,7 @@ export interface NexusGenInputs {
   }
   PostUpdateInput: {
     // input type
+    catalogId?: string | null // String
     content?: NexusGenScalars['JSON'] | null // JSON
     description?: string | null // String
     image?: string | null // String
@@ -433,6 +434,7 @@ export interface NexusGenInputs {
     NOT?: NexusGenInputs['PostWhereInput'][] | null // [PostWhereInput!]
     OR?: NexusGenInputs['PostWhereInput'][] | null // [PostWhereInput!]
     PostImages?: NexusGenInputs['PostImageListRelationFilter'] | null // PostImageListRelationFilter
+    catalogId?: NexusGenInputs['StringFilter'] | null // StringFilter
     content?: NexusGenInputs['JsonNullableFilter'] | null // JsonNullableFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null // DateTimeFilter
     createdById?: NexusGenInputs['StringFilter'] | null // StringFilter
@@ -709,14 +711,16 @@ export interface NexusGenFieldTypes {
   }
   Post: {
     // field return type
+    Catalog: NexusGenRootTypes['Catalog'] | null // Catalog
     CreatedBy: NexusGenRootTypes['User'] | null // User
-    catalog: NexusGenRootTypes['Catalog'][] | null // [Catalog!]
+    catalogId: string // ID!
     content: NexusGenScalars['JSON'] | null // JSON
     createdAt: NexusGenScalars['DateTime'] // DateTime!
     createdById: string // ID!
     description: string | null // String
     id: string // String!
     image: string | null // String
+    postimages: NexusGenRootTypes['PostImage'][] | null // [PostImage!]
     title: string // String!
     updatedAt: NexusGenScalars['DateTime'] // DateTime!
     urlname: string | null // String
@@ -837,14 +841,16 @@ export interface NexusGenFieldTypeNames {
   }
   Post: {
     // field return type name
+    Catalog: 'Catalog'
     CreatedBy: 'User'
-    catalog: 'Catalog'
+    catalogId: 'ID'
     content: 'JSON'
     createdAt: 'DateTime'
     createdById: 'ID'
     description: 'String'
     id: 'String'
     image: 'String'
+    postimages: 'PostImage'
     title: 'String'
     updatedAt: 'DateTime'
     urlname: 'String'

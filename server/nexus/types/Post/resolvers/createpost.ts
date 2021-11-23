@@ -12,7 +12,7 @@ export const createpost: FieldResolver<'Mutation', 'createPost'> = async (
     throw new Error('Не был получен пользователь')
   }
 
-  const { title, description, image } = args.data
+  const { title, description, image, catalogId } = args.data
   const urlname = typeof args.data.urlname === 'string' ? args.data.urlname : ''
 
   const createData: Prisma.PostCreateInput = {
@@ -27,15 +27,14 @@ export const createpost: FieldResolver<'Mutation', 'createPost'> = async (
     },
   }
 
-  /*
-  if (mashroomId) {
-    createData.Mashroom = {
+  if (catalogId) {
+    createData.Catalog = {
       connect: {
-        id: mashroomId,
+        id: catalogId,
       },
     }
   }
-*/
+
   const post = await ctx.prisma.post.create({
     data: createData,
   })

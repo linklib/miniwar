@@ -35,20 +35,32 @@ export const Post = objectType({
           : null
       },
     })
-    /*
+
     t.list.nonNull.field('postimages', {
       type: 'PostImage',
       resolve(_root, _args, ctx) {
         return ctx.prisma.postImage.findMany()
       },
     })
-*/
+
+    t.nonNull.id('catalogId')
+    t.field('Catalog', {
+      type: 'Catalog',
+      resolve({ catalogId }, _, ctx) {
+        return catalogId
+          ? ctx.prisma.catalog.findUnique({ where: { id: catalogId } })
+          : null
+      },
+    })
+
+    /*
     t.list.nonNull.field('catalog', {
       type: 'Catalog',
       resolve(_root, _args, ctx) {
         return ctx.prisma.catalog.findMany()
       },
     })
+    */
   },
 })
 
@@ -75,6 +87,7 @@ export const PostCreateInput = inputObjectType({
     t.string('urlname')
     t.field('content', { type: 'JSON' })
     t.string('image')
+    t.string('catalogId')
   },
 })
 
@@ -86,6 +99,7 @@ export const PostUpdateInput = inputObjectType({
     t.string('urlname')
     t.field('content', { type: 'JSON' })
     t.string('image')
+    t.string('catalogId')
   },
 })
 
