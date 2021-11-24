@@ -128,7 +128,7 @@ model Post {
   createdAt   DateTime    @default(now("0")) @db.DateTime(0)
   updatedAt   DateTime    @default(now("0")) @updatedAt @db.DateTime(0)
   title       String
-  urlname     String
+  urlname     String      @unique
   description String?
   image       String?
   content     Json?

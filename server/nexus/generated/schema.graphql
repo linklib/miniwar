@@ -551,6 +551,7 @@ input PostWhereInput {
 
 input PostWhereUniqueInput {
   id: String
+  urlname: String
 }
 
 type Query {

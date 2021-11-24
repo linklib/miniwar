@@ -448,6 +448,7 @@ export interface NexusGenInputs {
   PostWhereUniqueInput: {
     // input type
     id?: string | null // String
+    urlname?: string | null // String
   }
   ResetPasswordListRelationFilter: {
     // input type

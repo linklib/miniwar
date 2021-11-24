@@ -1,0 +1,41 @@
+query posts(
+  $where: PostWhereInput
+  $orderBy: [PostOrderByInput!]
+  $skip: Int
+  $take: Int
+) {
+  posts(where: $where, orderBy: $orderBy, skip: $skip, take: $take) {
+    ...post
+  }
+}
+mutation createPost($data: PostCreateInput!) {
+  createPost(data: $data) {
+    ...post
+  }
+}
+
+query PostUnique($where: PostWhereUniqueInput!) {
+  post(where: $where) {
+    ...post
+  }
+}
+
+fragment post on Post {
+  id
+  createdAt
+  updatedAt
+  title
+  description
+  urlname
+  image
+  content
+  createdById
+  CreatedBy {
+    id
+    username
+  }
+  catalogId
+  Catalog {
+    title
+  }
+}
