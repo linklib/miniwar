@@ -6,6 +6,9 @@ import { PostsPageViewStyled } from './styles'
 export const PostsPageView: React.FC<PostsPageViewProps> = ({ posts }) => {
   return (
     <PostsPageViewStyled>
+      <Link href={`/post/create?catalogId=${posts[0]?.catalogId}`}>
+        Добавить пост в категорию
+      </Link>
       <table>
         <thead>
           <tr>
