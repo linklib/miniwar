@@ -413,6 +413,7 @@ export interface NexusGenInputs {
     description?: NexusGenEnums['SortOrder'] | null // SortOrder
     id?: NexusGenEnums['SortOrder'] | null // SortOrder
     image?: NexusGenEnums['SortOrder'] | null // SortOrder
+    public?: NexusGenEnums['SortOrder'] | null // SortOrder
     title?: NexusGenEnums['SortOrder'] | null // SortOrder
     updatedAt?: NexusGenEnums['SortOrder'] | null // SortOrder
     urlname?: NexusGenEnums['SortOrder'] | null // SortOrder
@@ -441,6 +442,7 @@ export interface NexusGenInputs {
     description?: NexusGenInputs['StringNullableFilter'] | null // StringNullableFilter
     id?: NexusGenInputs['StringFilter'] | null // StringFilter
     image?: NexusGenInputs['StringNullableFilter'] | null // StringNullableFilter
+    public?: NexusGenInputs['BoolFilter'] | null // BoolFilter
     title?: NexusGenInputs['StringFilter'] | null // StringFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null // DateTimeFilter
     urlname?: NexusGenInputs['StringFilter'] | null // StringFilter
@@ -722,6 +724,7 @@ export interface NexusGenFieldTypes {
     id: string // String!
     image: string | null // String
     postimages: NexusGenRootTypes['PostImage'][] | null // [PostImage!]
+    public: boolean | null // Boolean
     title: string // String!
     updatedAt: NexusGenScalars['DateTime'] // DateTime!
     urlname: string | null // String
@@ -852,6 +855,7 @@ export interface NexusGenFieldTypeNames {
     id: 'String'
     image: 'String'
     postimages: 'PostImage'
+    public: 'Boolean'
     title: 'String'
     updatedAt: 'DateTime'
     urlname: 'String'

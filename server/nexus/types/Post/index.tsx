@@ -18,6 +18,7 @@ export const Post = objectType({
       description: 'Когда обновлен',
     })
     t.nonNull.string('title')
+    t.boolean('public')
     t.string('description')
     t.string('urlname')
     t.string('image')

@@ -5,6 +5,12 @@ import { Page } from '../../_App/interfaces'
 //import { PostPageView } from './View'
 import { useRouter } from 'next/router'
 
+import dynamic from 'next/dynamic'
+
+const CustomEditor = dynamic(() => import('src/components/EditorJS'), {
+  ssr: false,
+})
+
 export const PostPage: Page = () => {
   const router = useRouter()
   const urlname =
@@ -27,6 +33,8 @@ export const PostPage: Page = () => {
     <>
       <NextSeo title="Posts" />
       <h1>{post?.id}</h1>
+
+      <CustomEditor />
 
       {/*
       <PostPageView posts={data.data?.posts || []} />*/}

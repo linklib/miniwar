@@ -45,7 +45,7 @@ export type MutationFieldPolicy = {
 	singleUpload?: FieldPolicy<any> | FieldReadFunction<any>,
 	updatePost?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type PostKeySpecifier = ('Catalog' | 'CreatedBy' | 'catalogId' | 'content' | 'createdAt' | 'createdById' | 'description' | 'id' | 'image' | 'postimages' | 'title' | 'updatedAt' | 'urlname' | PostKeySpecifier)[];
+export type PostKeySpecifier = ('Catalog' | 'CreatedBy' | 'catalogId' | 'content' | 'createdAt' | 'createdById' | 'description' | 'id' | 'image' | 'postimages' | 'public' | 'title' | 'updatedAt' | 'urlname' | PostKeySpecifier)[];
 export type PostFieldPolicy = {
 	Catalog?: FieldPolicy<any> | FieldReadFunction<any>,
 	CreatedBy?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -57,6 +57,7 @@ export type PostFieldPolicy = {
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
 	image?: FieldPolicy<any> | FieldReadFunction<any>,
 	postimages?: FieldPolicy<any> | FieldReadFunction<any>,
+	public?: FieldPolicy<any> | FieldReadFunction<any>,
 	title?: FieldPolicy<any> | FieldReadFunction<any>,
 	updatedAt?: FieldPolicy<any> | FieldReadFunction<any>,
 	urlname?: FieldPolicy<any> | FieldReadFunction<any>

@@ -53,8 +53,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'createdAt' | 'updatedAt' | 'code' | 'password' | 'validTill' | 'User'
     }
     posts: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'createdAt' | 'updatedAt' | 'title' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'CreatedBy' | 'PostImages' | 'catalogId' | 'Catalog'
-      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'catalogId'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'createdAt' | 'updatedAt' | 'title' | 'public' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'CreatedBy' | 'PostImages' | 'catalogId' | 'Catalog'
+      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'public' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'catalogId'
     }
     postImages: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'postId' | 'Post' | 'fileId' | 'File'
@@ -87,8 +87,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'createdAt' | 'updatedAt' | 'code' | 'password' | 'validTill' | 'User'
     }
     Posts: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'createdAt' | 'updatedAt' | 'title' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'CreatedBy' | 'PostImages' | 'catalogId' | 'Catalog'
-      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'catalogId'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'createdAt' | 'updatedAt' | 'title' | 'public' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'CreatedBy' | 'PostImages' | 'catalogId' | 'Catalog'
+      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'public' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'catalogId'
     }
   }
   Token: {
@@ -126,8 +126,8 @@ interface NexusPrismaInputs {
   }
   Catalog: {
     Posts: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'createdAt' | 'updatedAt' | 'title' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'CreatedBy' | 'PostImages' | 'catalogId' | 'Catalog'
-      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'catalogId'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'createdAt' | 'updatedAt' | 'title' | 'public' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'CreatedBy' | 'PostImages' | 'catalogId' | 'Catalog'
+      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'public' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'catalogId'
     }
   }
 }
@@ -300,6 +300,7 @@ interface NexusPrismaOutputs {
     createdAt: 'DateTime'
     updatedAt: 'DateTime'
     title: 'String'
+    public: 'Boolean'
     urlname: 'String'
     description: 'String'
     image: 'String'

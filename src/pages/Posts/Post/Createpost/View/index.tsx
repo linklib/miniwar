@@ -1,8 +1,16 @@
 import React, { useMemo } from 'react'
 import { useCurrentUser } from 'src/hooks/useCurrentUser'
 
-//import CreatePostForm from './Form'
+import CreatePostForm from './Form'
 
+/*
+
+import dynamic from 'next/dynamic'
+
+const CustomEditor = dynamic(() => import('src/components/EditorJS'), {
+  ssr: false,
+})
+*/
 const CreatePostPageView: React.FC = () => {
   const currentUser = useCurrentUser()
 
@@ -21,7 +29,12 @@ const CreatePostPageView: React.FC = () => {
     /**
      * Иначе показываем форму добавления поста
      */
-    return <> {/*<CreatePostForm />*/}</>
+    return (
+      <>
+        {/* tools={{ simpleImage: SimpleImage }} <ReactEditorJS /><CustomEditor />*/}
+        <CreatePostForm />
+      </>
+    )
   }, [currentUser])
 }
 

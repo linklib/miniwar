@@ -448,6 +448,7 @@ type Post {
   id: String!
   image: String
   postimages: [PostImage!]
+  public: Boolean
   title: String!
 
   """
@@ -516,6 +517,7 @@ input PostOrderByInput {
   description: SortOrder
   id: SortOrder
   image: SortOrder
+  public: SortOrder
   title: SortOrder
   updatedAt: SortOrder
   urlname: SortOrder
@@ -544,6 +546,7 @@ input PostWhereInput {
   description: StringNullableFilter
   id: StringFilter
   image: StringNullableFilter
+  public: BoolFilter
   title: StringFilter
   updatedAt: DateTimeFilter
   urlname: StringFilter

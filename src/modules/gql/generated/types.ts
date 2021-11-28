@@ -453,6 +453,7 @@ export interface Post {
   id: Scalars['String'];
   image?: Maybe<Scalars['String']>;
   postimages?: Maybe<Array<PostImage>>;
+  public?: Maybe<Scalars['Boolean']>;
   title: Scalars['String'];
   /** Когда обновлен */
   updatedAt: Scalars['DateTime'];
@@ -517,6 +518,7 @@ export interface PostOrderByInput {
   description?: Maybe<SortOrder>;
   id?: Maybe<SortOrder>;
   image?: Maybe<SortOrder>;
+  public?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
   updatedAt?: Maybe<SortOrder>;
   urlname?: Maybe<SortOrder>;
@@ -545,6 +547,7 @@ export interface PostWhereInput {
   description?: Maybe<StringNullableFilter>;
   id?: Maybe<StringFilter>;
   image?: Maybe<StringNullableFilter>;
+  public?: Maybe<BoolFilter>;
   title?: Maybe<StringFilter>;
   updatedAt?: Maybe<DateTimeFilter>;
   urlname?: Maybe<StringFilter>;
@@ -552,6 +555,7 @@ export interface PostWhereInput {
 
 export interface PostWhereUniqueInput {
   id?: Maybe<Scalars['String']>;
+  urlname?: Maybe<Scalars['String']>;
 }
 
 export interface Query {
