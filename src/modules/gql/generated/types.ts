@@ -56,6 +56,37 @@ export interface CatalogListRelationFilter {
   some?: Maybe<CatalogWhereInput>;
 }
 
+/** Пункт каталога */
+export interface CatalogNew {
+  __typename?: 'CatalogNew';
+  id: Scalars['String'];
+  parent: Scalars['String'];
+  title: Scalars['String'];
+  urlname: Scalars['String'];
+}
+
+export interface CatalogNewOrderByInput {
+  id?: Maybe<SortOrder>;
+  parent?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  urlname?: Maybe<SortOrder>;
+}
+
+export interface CatalogNewWhereInput {
+  AND?: Maybe<Array<CatalogNewWhereInput>>;
+  NOT?: Maybe<Array<CatalogNewWhereInput>>;
+  OR?: Maybe<Array<CatalogNewWhereInput>>;
+  Posts?: Maybe<PostListRelationFilter>;
+  id?: Maybe<StringFilter>;
+  parent?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  urlname?: Maybe<StringFilter>;
+}
+
+export interface CatalogNewWhereUniqueInput {
+  id?: Maybe<Scalars['String']>;
+}
+
 export interface CatalogOrderByInput {
   CatalogtopId?: Maybe<SortOrder>;
   id?: Maybe<SortOrder>;
@@ -443,8 +474,10 @@ export interface NestedStringNullableFilter {
 export interface Post {
   __typename?: 'Post';
   Catalog?: Maybe<Catalog>;
+  CatalogNew?: Maybe<CatalogNew>;
   CreatedBy?: Maybe<User>;
   catalogId: Scalars['ID'];
+  catalogNewId: Scalars['ID'];
   content?: Maybe<Scalars['JSON']>;
   /** Когда создан */
   createdAt: Scalars['DateTime'];
@@ -462,6 +495,7 @@ export interface Post {
 
 export interface PostCreateInput {
   catalogId?: Maybe<Scalars['String']>;
+  catalogNewId?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['JSON']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
@@ -512,6 +546,7 @@ export interface PostListRelationFilter {
 
 export interface PostOrderByInput {
   catalogId?: Maybe<SortOrder>;
+  catalogNewId?: Maybe<SortOrder>;
   content?: Maybe<SortOrder>;
   createdAt?: Maybe<SortOrder>;
   createdById?: Maybe<SortOrder>;
@@ -526,6 +561,7 @@ export interface PostOrderByInput {
 
 export interface PostUpdateInput {
   catalogId?: Maybe<Scalars['String']>;
+  catalogNewId?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['JSON']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
@@ -536,11 +572,13 @@ export interface PostUpdateInput {
 export interface PostWhereInput {
   AND?: Maybe<Array<PostWhereInput>>;
   Catalog?: Maybe<CatalogWhereInput>;
+  CatalogNew?: Maybe<CatalogNewWhereInput>;
   CreatedBy?: Maybe<UserWhereInput>;
   NOT?: Maybe<Array<PostWhereInput>>;
   OR?: Maybe<Array<PostWhereInput>>;
   PostImages?: Maybe<PostImageListRelationFilter>;
   catalogId?: Maybe<StringFilter>;
+  catalogNewId?: Maybe<StringFilter>;
   content?: Maybe<JsonNullableFilter>;
   createdAt?: Maybe<DateTimeFilter>;
   createdById?: Maybe<StringFilter>;
@@ -562,6 +600,10 @@ export interface Query {
   __typename?: 'Query';
   /** Подраздел каталога */
   catalog?: Maybe<Catalog>;
+  /** Подраздел каталога */
+  catalogNew?: Maybe<CatalogNew>;
+  /** Подразделы каталога */
+  catalogNews: Array<CatalogNew>;
   /** Подразделы каталога */
   catalogs: Array<Catalog>;
   /** Раздел каталога */
@@ -595,6 +637,20 @@ export interface Query {
 
 export type QueryCatalogArgs = {
   where: CatalogWhereUniqueInput;
+};
+
+
+export type QueryCatalogNewArgs = {
+  where: CatalogNewWhereUniqueInput;
+};
+
+
+export type QueryCatalogNewsArgs = {
+  cursor?: Maybe<CatalogNewWhereUniqueInput>;
+  orderBy?: Maybe<Array<CatalogNewOrderByInput>>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+  where?: Maybe<CatalogNewWhereInput>;
 };
 
 

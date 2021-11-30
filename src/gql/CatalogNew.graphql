@@ -1,0 +1,12 @@
+query catalogNews($where: CatalogNewWhereInput) {
+  catalogNews(where: $where) {
+    ...CatalogNewData
+  }
+}
+
+fragment CatalogNewData on CatalogNew {
+  id
+  title
+  urlname
+  parent
+}

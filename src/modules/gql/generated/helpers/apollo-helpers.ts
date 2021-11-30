@@ -15,6 +15,13 @@ export type CatalogFieldPolicy = {
 	title?: FieldPolicy<any> | FieldReadFunction<any>,
 	urlname?: FieldPolicy<any> | FieldReadFunction<any>
 };
+export type CatalogNewKeySpecifier = ('id' | 'parent' | 'title' | 'urlname' | CatalogNewKeySpecifier)[];
+export type CatalogNewFieldPolicy = {
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	parent?: FieldPolicy<any> | FieldReadFunction<any>,
+	title?: FieldPolicy<any> | FieldReadFunction<any>,
+	urlname?: FieldPolicy<any> | FieldReadFunction<any>
+};
 export type CatalogtopKeySpecifier = ('catalogs' | 'id' | 'title' | 'urlname' | CatalogtopKeySpecifier)[];
 export type CatalogtopFieldPolicy = {
 	catalogs?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -45,11 +52,13 @@ export type MutationFieldPolicy = {
 	singleUpload?: FieldPolicy<any> | FieldReadFunction<any>,
 	updatePost?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type PostKeySpecifier = ('Catalog' | 'CreatedBy' | 'catalogId' | 'content' | 'createdAt' | 'createdById' | 'description' | 'id' | 'image' | 'postimages' | 'public' | 'title' | 'updatedAt' | 'urlname' | PostKeySpecifier)[];
+export type PostKeySpecifier = ('Catalog' | 'CatalogNew' | 'CreatedBy' | 'catalogId' | 'catalogNewId' | 'content' | 'createdAt' | 'createdById' | 'description' | 'id' | 'image' | 'postimages' | 'public' | 'title' | 'updatedAt' | 'urlname' | PostKeySpecifier)[];
 export type PostFieldPolicy = {
 	Catalog?: FieldPolicy<any> | FieldReadFunction<any>,
+	CatalogNew?: FieldPolicy<any> | FieldReadFunction<any>,
 	CreatedBy?: FieldPolicy<any> | FieldReadFunction<any>,
 	catalogId?: FieldPolicy<any> | FieldReadFunction<any>,
+	catalogNewId?: FieldPolicy<any> | FieldReadFunction<any>,
 	content?: FieldPolicy<any> | FieldReadFunction<any>,
 	createdAt?: FieldPolicy<any> | FieldReadFunction<any>,
 	createdById?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -68,9 +77,11 @@ export type PostImageFieldPolicy = {
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
 	postId?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type QueryKeySpecifier = ('catalog' | 'catalogs' | 'catalogtop' | 'catalogtops' | 'file' | 'files' | 'filesCount' | 'me' | 'post' | 'postImage' | 'postImages' | 'posts' | 'tokens' | 'user' | 'users' | 'usersCount' | QueryKeySpecifier)[];
+export type QueryKeySpecifier = ('catalog' | 'catalogNew' | 'catalogNews' | 'catalogs' | 'catalogtop' | 'catalogtops' | 'file' | 'files' | 'filesCount' | 'me' | 'post' | 'postImage' | 'postImages' | 'posts' | 'tokens' | 'user' | 'users' | 'usersCount' | QueryKeySpecifier)[];
 export type QueryFieldPolicy = {
 	catalog?: FieldPolicy<any> | FieldReadFunction<any>,
+	catalogNew?: FieldPolicy<any> | FieldReadFunction<any>,
+	catalogNews?: FieldPolicy<any> | FieldReadFunction<any>,
 	catalogs?: FieldPolicy<any> | FieldReadFunction<any>,
 	catalogtop?: FieldPolicy<any> | FieldReadFunction<any>,
 	catalogtops?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -135,6 +146,10 @@ export type TypedTypePolicies = TypePolicies & {
 	Catalog?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | CatalogKeySpecifier | (() => undefined | CatalogKeySpecifier),
 		fields?: CatalogFieldPolicy,
+	},
+	CatalogNew?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | CatalogNewKeySpecifier | (() => undefined | CatalogNewKeySpecifier),
+		fields?: CatalogNewFieldPolicy,
 	},
 	Catalogtop?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | CatalogtopKeySpecifier | (() => undefined | CatalogtopKeySpecifier),

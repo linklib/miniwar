@@ -34,6 +34,7 @@ fragment post on Post {
     id
     username
   }
+  catalogNewId
   catalogId
   Catalog {
     title

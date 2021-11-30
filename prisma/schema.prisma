@@ -124,20 +124,22 @@ model ResetPassword {
 // Post:
 
 model Post {
-  id          String      @id @default(cuid()) @db.VarChar(32)
-  createdAt   DateTime    @default(now("0")) @db.DateTime(0)
-  updatedAt   DateTime    @default(now("0")) @updatedAt @db.DateTime(0)
-  title       String
-  public      Boolean     @default(false)
-  urlname     String      @unique
-  description String?
-  image       String?
-  content     Json?
-  createdById String      @db.VarChar(32)
-  CreatedBy   User        @relation(fields: [createdById], references: [id])
-  PostImages  PostImage[]
-  catalogId   String      @db.VarChar(32)
-  Catalog     Catalog?    @relation(fields: [catalogId], references: [id])
+  id             String      @id @default(cuid()) @db.VarChar(32)
+  createdAt      DateTime    @default(now("0")) @db.DateTime(0)
+  updatedAt      DateTime    @default(now("0")) @updatedAt @db.DateTime(0)
+  title          String
+  public         Boolean     @default(false)
+  urlname        String      @unique
+  description    String?
+  image          String?
+  content        Json?
+  createdById    String      @db.VarChar(32)
+  CreatedBy      User        @relation(fields: [createdById], references: [id])
+  PostImages     PostImage[]
+  catalogId      String      @db.VarChar(32)
+  Catalog        Catalog     @relation(fields: [catalogId], references: [id])
+  catalogNewId   String      @db.VarChar(32)
+  CatalogNew     CatalogNew  @relation(fields: [catalogNewId], references: [id])
 
   @@index([createdById], name: "User")
 }
@@ -165,4 +167,12 @@ model Catalog {
   Catalogtop   Catalogtop @relation(fields: [CatalogtopId], references: [id])
   Posts        Post[]
 
+}
+
+model CatalogNew {
+  id           String     @id @db.VarChar(32)
+  title        String
+  urlname      String
+  parent       String
+  Posts        Post[]
 }

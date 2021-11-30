@@ -13,6 +13,7 @@ import type {
   Catalog,
   Post,
   PostImage,
+  CatalogNew,
 } from '@prisma/client'
 import type { core } from 'nexus'
 declare global {
@@ -73,6 +74,28 @@ export interface NexusGenInputs {
     every?: NexusGenInputs['CatalogWhereInput'] | null // CatalogWhereInput
     none?: NexusGenInputs['CatalogWhereInput'] | null // CatalogWhereInput
     some?: NexusGenInputs['CatalogWhereInput'] | null // CatalogWhereInput
+  }
+  CatalogNewOrderByInput: {
+    // input type
+    id?: NexusGenEnums['SortOrder'] | null // SortOrder
+    parent?: NexusGenEnums['SortOrder'] | null // SortOrder
+    title?: NexusGenEnums['SortOrder'] | null // SortOrder
+    urlname?: NexusGenEnums['SortOrder'] | null // SortOrder
+  }
+  CatalogNewWhereInput: {
+    // input type
+    AND?: NexusGenInputs['CatalogNewWhereInput'][] | null // [CatalogNewWhereInput!]
+    NOT?: NexusGenInputs['CatalogNewWhereInput'][] | null // [CatalogNewWhereInput!]
+    OR?: NexusGenInputs['CatalogNewWhereInput'][] | null // [CatalogNewWhereInput!]
+    Posts?: NexusGenInputs['PostListRelationFilter'] | null // PostListRelationFilter
+    id?: NexusGenInputs['StringFilter'] | null // StringFilter
+    parent?: NexusGenInputs['StringFilter'] | null // StringFilter
+    title?: NexusGenInputs['StringFilter'] | null // StringFilter
+    urlname?: NexusGenInputs['StringFilter'] | null // StringFilter
+  }
+  CatalogNewWhereUniqueInput: {
+    // input type
+    id?: string | null // String
   }
   CatalogOrderByInput: {
     // input type
@@ -365,6 +388,7 @@ export interface NexusGenInputs {
   PostCreateInput: {
     // input type
     catalogId?: string | null // String
+    catalogNewId?: string | null // String
     content?: NexusGenScalars['JSON'] | null // JSON
     description?: string | null // String
     image?: string | null // String
@@ -407,6 +431,7 @@ export interface NexusGenInputs {
   PostOrderByInput: {
     // input type
     catalogId?: NexusGenEnums['SortOrder'] | null // SortOrder
+    catalogNewId?: NexusGenEnums['SortOrder'] | null // SortOrder
     content?: NexusGenEnums['SortOrder'] | null // SortOrder
     createdAt?: NexusGenEnums['SortOrder'] | null // SortOrder
     createdById?: NexusGenEnums['SortOrder'] | null // SortOrder
@@ -421,6 +446,7 @@ export interface NexusGenInputs {
   PostUpdateInput: {
     // input type
     catalogId?: string | null // String
+    catalogNewId?: string | null // String
     content?: NexusGenScalars['JSON'] | null // JSON
     description?: string | null // String
     image?: string | null // String
@@ -431,11 +457,13 @@ export interface NexusGenInputs {
     // input type
     AND?: NexusGenInputs['PostWhereInput'][] | null // [PostWhereInput!]
     Catalog?: NexusGenInputs['CatalogWhereInput'] | null // CatalogWhereInput
+    CatalogNew?: NexusGenInputs['CatalogNewWhereInput'] | null // CatalogNewWhereInput
     CreatedBy?: NexusGenInputs['UserWhereInput'] | null // UserWhereInput
     NOT?: NexusGenInputs['PostWhereInput'][] | null // [PostWhereInput!]
     OR?: NexusGenInputs['PostWhereInput'][] | null // [PostWhereInput!]
     PostImages?: NexusGenInputs['PostImageListRelationFilter'] | null // PostImageListRelationFilter
     catalogId?: NexusGenInputs['StringFilter'] | null // StringFilter
+    catalogNewId?: NexusGenInputs['StringFilter'] | null // StringFilter
     content?: NexusGenInputs['JsonNullableFilter'] | null // JsonNullableFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null // DateTimeFilter
     createdById?: NexusGenInputs['StringFilter'] | null // StringFilter
@@ -632,6 +660,7 @@ export interface NexusGenObjects {
     token?: string | null // String
   }
   Catalog: Catalog
+  CatalogNew: CatalogNew
   Catalogtop: Catalogtop
   File: File
   Mutation: {}
@@ -682,6 +711,13 @@ export interface NexusGenFieldTypes {
     title: string // String!
     urlname: string // String!
   }
+  CatalogNew: {
+    // field return type
+    id: string // String!
+    parent: string // String!
+    title: string // String!
+    urlname: string // String!
+  }
   Catalogtop: {
     // field return type
     catalogs: NexusGenRootTypes['Catalog'][] | null // [Catalog!]
@@ -715,8 +751,10 @@ export interface NexusGenFieldTypes {
   Post: {
     // field return type
     Catalog: NexusGenRootTypes['Catalog'] | null // Catalog
+    CatalogNew: NexusGenRootTypes['CatalogNew'] | null // CatalogNew
     CreatedBy: NexusGenRootTypes['User'] | null // User
     catalogId: string // ID!
+    catalogNewId: string // ID!
     content: NexusGenScalars['JSON'] | null // JSON
     createdAt: NexusGenScalars['DateTime'] // DateTime!
     createdById: string // ID!
@@ -738,6 +776,8 @@ export interface NexusGenFieldTypes {
   Query: {
     // field return type
     catalog: NexusGenRootTypes['Catalog'] | null // Catalog
+    catalogNew: NexusGenRootTypes['CatalogNew'] | null // CatalogNew
+    catalogNews: NexusGenRootTypes['CatalogNew'][] // [CatalogNew!]!
     catalogs: NexusGenRootTypes['Catalog'][] // [Catalog!]!
     catalogtop: NexusGenRootTypes['Catalogtop'] | null // Catalogtop
     catalogtops: NexusGenRootTypes['Catalogtop'][] // [Catalogtop!]!
@@ -813,6 +853,13 @@ export interface NexusGenFieldTypeNames {
     title: 'String'
     urlname: 'String'
   }
+  CatalogNew: {
+    // field return type name
+    id: 'String'
+    parent: 'String'
+    title: 'String'
+    urlname: 'String'
+  }
   Catalogtop: {
     // field return type name
     catalogs: 'Catalog'
@@ -846,8 +893,10 @@ export interface NexusGenFieldTypeNames {
   Post: {
     // field return type name
     Catalog: 'Catalog'
+    CatalogNew: 'CatalogNew'
     CreatedBy: 'User'
     catalogId: 'ID'
+    catalogNewId: 'ID'
     content: 'JSON'
     createdAt: 'DateTime'
     createdById: 'ID'
@@ -869,6 +918,8 @@ export interface NexusGenFieldTypeNames {
   Query: {
     // field return type name
     catalog: 'Catalog'
+    catalogNew: 'CatalogNew'
+    catalogNews: 'CatalogNew'
     catalogs: 'Catalog'
     catalogtop: 'Catalogtop'
     catalogtops: 'Catalogtop'
@@ -965,6 +1016,18 @@ export interface NexusGenArgTypes {
     catalog: {
       // args
       where: NexusGenInputs['CatalogWhereUniqueInput'] // CatalogWhereUniqueInput!
+    }
+    catalogNew: {
+      // args
+      where: NexusGenInputs['CatalogNewWhereUniqueInput'] // CatalogNewWhereUniqueInput!
+    }
+    catalogNews: {
+      // args
+      cursor?: NexusGenInputs['CatalogNewWhereUniqueInput'] | null // CatalogNewWhereUniqueInput
+      orderBy?: NexusGenInputs['CatalogNewOrderByInput'][] | null // [CatalogNewOrderByInput!]
+      skip?: number | null // Int
+      take?: number | null // Int
+      where?: NexusGenInputs['CatalogNewWhereInput'] | null // CatalogNewWhereInput
     }
     catalogs: {
       // args

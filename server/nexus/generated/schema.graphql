@@ -34,6 +34,38 @@ input CatalogListRelationFilter {
   some: CatalogWhereInput
 }
 
+"""
+Пункт каталога
+"""
+type CatalogNew {
+  id: String!
+  parent: String!
+  title: String!
+  urlname: String!
+}
+
+input CatalogNewOrderByInput {
+  id: SortOrder
+  parent: SortOrder
+  title: SortOrder
+  urlname: SortOrder
+}
+
+input CatalogNewWhereInput {
+  AND: [CatalogNewWhereInput!]
+  NOT: [CatalogNewWhereInput!]
+  OR: [CatalogNewWhereInput!]
+  Posts: PostListRelationFilter
+  id: StringFilter
+  parent: StringFilter
+  title: StringFilter
+  urlname: StringFilter
+}
+
+input CatalogNewWhereUniqueInput {
+  id: String
+}
+
 input CatalogOrderByInput {
   CatalogtopId: SortOrder
   id: SortOrder
@@ -435,8 +467,10 @@ input NestedStringNullableFilter {
 """
 type Post {
   Catalog: Catalog
+  CatalogNew: CatalogNew
   CreatedBy: User
   catalogId: ID!
+  catalogNewId: ID!
   content: JSON
 
   """
@@ -460,6 +494,7 @@ type Post {
 
 input PostCreateInput {
   catalogId: String
+  catalogNewId: String
   content: JSON
   description: String
   image: String
@@ -511,6 +546,7 @@ input PostListRelationFilter {
 
 input PostOrderByInput {
   catalogId: SortOrder
+  catalogNewId: SortOrder
   content: SortOrder
   createdAt: SortOrder
   createdById: SortOrder
@@ -525,6 +561,7 @@ input PostOrderByInput {
 
 input PostUpdateInput {
   catalogId: String
+  catalogNewId: String
   content: JSON
   description: String
   image: String
@@ -535,11 +572,13 @@ input PostUpdateInput {
 input PostWhereInput {
   AND: [PostWhereInput!]
   Catalog: CatalogWhereInput
+  CatalogNew: CatalogNewWhereInput
   CreatedBy: UserWhereInput
   NOT: [PostWhereInput!]
   OR: [PostWhereInput!]
   PostImages: PostImageListRelationFilter
   catalogId: StringFilter
+  catalogNewId: StringFilter
   content: JsonNullableFilter
   createdAt: DateTimeFilter
   createdById: StringFilter
@@ -562,6 +601,22 @@ type Query {
   Подраздел каталога
   """
   catalog(where: CatalogWhereUniqueInput!): Catalog
+
+  """
+  Подраздел каталога
+  """
+  catalogNew(where: CatalogNewWhereUniqueInput!): CatalogNew
+
+  """
+  Подразделы каталога
+  """
+  catalogNews(
+    cursor: CatalogNewWhereUniqueInput
+    orderBy: [CatalogNewOrderByInput!]
+    skip: Int
+    take: Int
+    where: CatalogNewWhereInput
+  ): [CatalogNew!]!
 
   """
   Подразделы каталога

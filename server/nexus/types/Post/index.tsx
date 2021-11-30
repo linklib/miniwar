@@ -54,6 +54,16 @@ export const Post = objectType({
       },
     })
 
+    t.nonNull.id('catalogNewId')
+    t.field('CatalogNew', {
+      type: 'CatalogNew',
+      resolve({ catalogNewId }, _, ctx) {
+        return catalogNewId
+          ? ctx.prisma.catalogNew.findUnique({ where: { id: catalogNewId } })
+          : null
+      },
+    })
+
     /*
     t.list.nonNull.field('catalog', {
       type: 'Catalog',
@@ -89,6 +99,7 @@ export const PostCreateInput = inputObjectType({
     t.field('content', { type: 'JSON' })
     t.string('image')
     t.string('catalogId')
+    t.string('catalogNewId')
   },
 })
 
@@ -101,6 +112,7 @@ export const PostUpdateInput = inputObjectType({
     t.field('content', { type: 'JSON' })
     t.string('image')
     t.string('catalogId')
+    t.string('catalogNewId')
   },
 })
 

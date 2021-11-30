@@ -23,6 +23,7 @@ interface PrismaModels {
   PostImage: Prisma.PostImage
   Catalogtop: Prisma.Catalogtop
   Catalog: Prisma.Catalog
+  CatalogNew: Prisma.CatalogNew
 }
 
 // Prisma input types metadata
@@ -53,8 +54,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'createdAt' | 'updatedAt' | 'code' | 'password' | 'validTill' | 'User'
     }
     posts: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'createdAt' | 'updatedAt' | 'title' | 'public' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'CreatedBy' | 'PostImages' | 'catalogId' | 'Catalog'
-      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'public' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'catalogId'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'createdAt' | 'updatedAt' | 'title' | 'public' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'CreatedBy' | 'PostImages' | 'catalogId' | 'Catalog' | 'catalogNewId' | 'CatalogNew'
+      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'public' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'catalogId' | 'catalogNewId'
     }
     postImages: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'postId' | 'Post' | 'fileId' | 'File'
@@ -67,6 +68,10 @@ interface NexusPrismaInputs {
     catalogs: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'urlname' | 'CatalogtopId' | 'Catalogtop' | 'Posts'
       ordering: 'id' | 'title' | 'urlname' | 'CatalogtopId'
+    }
+    catalogNews: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'urlname' | 'parent' | 'Posts'
+      ordering: 'id' | 'title' | 'urlname' | 'parent'
     }
   },
   User: {
@@ -87,8 +92,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'createdAt' | 'updatedAt' | 'code' | 'password' | 'validTill' | 'User'
     }
     Posts: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'createdAt' | 'updatedAt' | 'title' | 'public' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'CreatedBy' | 'PostImages' | 'catalogId' | 'Catalog'
-      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'public' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'catalogId'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'createdAt' | 'updatedAt' | 'title' | 'public' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'CreatedBy' | 'PostImages' | 'catalogId' | 'Catalog' | 'catalogNewId' | 'CatalogNew'
+      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'public' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'catalogId' | 'catalogNewId'
     }
   }
   Token: {
@@ -126,8 +131,14 @@ interface NexusPrismaInputs {
   }
   Catalog: {
     Posts: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'createdAt' | 'updatedAt' | 'title' | 'public' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'CreatedBy' | 'PostImages' | 'catalogId' | 'Catalog'
-      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'public' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'catalogId'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'createdAt' | 'updatedAt' | 'title' | 'public' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'CreatedBy' | 'PostImages' | 'catalogId' | 'Catalog' | 'catalogNewId' | 'CatalogNew'
+      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'public' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'catalogId' | 'catalogNewId'
+    }
+  }
+  CatalogNew: {
+    Posts: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'createdAt' | 'updatedAt' | 'title' | 'public' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'CreatedBy' | 'PostImages' | 'catalogId' | 'Catalog' | 'catalogNewId' | 'CatalogNew'
+      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'public' | 'urlname' | 'description' | 'image' | 'content' | 'createdById' | 'catalogId' | 'catalogNewId'
     }
   }
 }
@@ -155,6 +166,8 @@ interface NexusPrismaOutputs {
     catalogtops: 'Catalogtop'
     catalog: 'Catalog'
     catalogs: 'Catalog'
+    catalogNew: 'CatalogNew'
+    catalogNews: 'CatalogNew'
   },
   Mutation: {
     createOneUser: 'User'
@@ -217,6 +230,12 @@ interface NexusPrismaOutputs {
     deleteOneCatalog: 'Catalog'
     deleteManyCatalog: 'AffectedRowsOutput'
     upsertOneCatalog: 'Catalog'
+    createOneCatalogNew: 'CatalogNew'
+    updateOneCatalogNew: 'CatalogNew'
+    updateManyCatalogNew: 'AffectedRowsOutput'
+    deleteOneCatalogNew: 'CatalogNew'
+    deleteManyCatalogNew: 'AffectedRowsOutput'
+    upsertOneCatalogNew: 'CatalogNew'
   },
   User: {
     id: 'String'
@@ -310,6 +329,8 @@ interface NexusPrismaOutputs {
     PostImages: 'PostImage'
     catalogId: 'String'
     Catalog: 'Catalog'
+    catalogNewId: 'String'
+    CatalogNew: 'CatalogNew'
   }
   PostImage: {
     id: 'String'
@@ -332,6 +353,13 @@ interface NexusPrismaOutputs {
     Catalogtop: 'Catalogtop'
     Posts: 'Post'
   }
+  CatalogNew: {
+    id: 'String'
+    title: 'String'
+    urlname: 'String'
+    parent: 'String'
+    Posts: 'Post'
+  }
 }
 
 // Helper to gather all methods relative to a model
@@ -346,6 +374,7 @@ interface NexusPrismaMethods {
   PostImage: Typegen.NexusPrismaFields<'PostImage'>
   Catalogtop: Typegen.NexusPrismaFields<'Catalogtop'>
   Catalog: Typegen.NexusPrismaFields<'Catalog'>
+  CatalogNew: Typegen.NexusPrismaFields<'CatalogNew'>
   Query: Typegen.NexusPrismaFields<'Query'>
   Mutation: Typegen.NexusPrismaFields<'Mutation'>
 }
