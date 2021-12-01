@@ -3,7 +3,7 @@ import { createReactEditorJS } from 'react-editor-js'
 //import SimpleImage from '@editorjs/simple-image'
 import CheckList from '@editorjs/checklist'
 import Image from '@editorjs/image'
-import Uploader from '@prisma-cms/uploader'
+//import Uploader from '@prisma-cms/uploader'
 
 /*
 function UploadFromEditor(file) {
@@ -20,10 +20,10 @@ export const CustomEditor = () => {
         checklist: CheckList,
         image: {
           class: Image,
-          config: {
+          /*config: {
             uploader: {
               uploadByFile(file: string | Blob) {
-                console.log('file', file)
+                //console.log('file', file)
 
                 return Uploader.upload(file).then(() => {
                   return {
@@ -35,7 +35,7 @@ export const CustomEditor = () => {
                 })
               },
             },
-          },
+          },*/
         },
       }}
     />

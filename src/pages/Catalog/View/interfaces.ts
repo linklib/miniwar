@@ -1,5 +1,5 @@
-import { CatalogdataFragment } from 'src/modules/gql/generated'
+import { CatalogNewDataFragment } from 'src/modules/gql/generated'
 
-export type CatalogsPageViewProps = {
-  catalogs: CatalogdataFragment[]
+export type CatalogNewsPageViewProps = {
+  catalogs: CatalogNewDataFragment[]
 }

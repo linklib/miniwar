@@ -1,10 +1,10 @@
 import React from 'react'
 import { NextSeo } from 'next-seo'
 import Link from 'next/link'
-import { CatalogsPageViewProps } from './interfaces'
+import { CatalogNewsPageViewProps } from './interfaces'
 import { useRouter } from 'next/router'
 
-export const CatalogsPageView: React.FC<CatalogsPageViewProps> = ({
+export const CatalogsPageView: React.FC<CatalogNewsPageViewProps> = ({
   catalogs,
 }) => {
   const router = useRouter()

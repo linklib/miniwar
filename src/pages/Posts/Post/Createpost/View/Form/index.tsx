@@ -34,7 +34,7 @@ const CreatePostForm: React.FC = () => {
   //const context = useContext(Context)
   const router = useRouter()
 
-  console.log('catalogId', router.query)
+  //console.log('catalogId', router.query)
 
   const catalogId =
     typeof router.query.catalogId === 'string'
@@ -53,6 +53,7 @@ const CreatePostForm: React.FC = () => {
         content: yup.string(),
         image: yup.string(),
         catalogId: yup.string(),
+        catalogNewId: yup.string(),
       })
       .defined()
 
