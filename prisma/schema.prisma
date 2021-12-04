@@ -132,7 +132,7 @@ model Post {
   urlname        String      @unique
   description    String?
   image          String?
-  content        Json?
+  content        String?     @db.MediumText
   createdById    String      @db.VarChar(32)
   CreatedBy      User        @relation(fields: [createdById], references: [id])
   PostImages     PostImage[]

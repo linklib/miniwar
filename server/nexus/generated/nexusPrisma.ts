@@ -9,7 +9,7 @@ type Pagination = {
 }
 
 // Prisma custom scalar names
-type CustomScalars = 'DateTime' | 'Json'
+type CustomScalars = 'DateTime'
 
 // Prisma model type definitions
 interface PrismaModels {
@@ -323,7 +323,7 @@ interface NexusPrismaOutputs {
     urlname: 'String'
     description: 'String'
     image: 'String'
-    content: 'Json'
+    content: 'String'
     createdById: 'String'
     CreatedBy: 'User'
     PostImages: 'PostImage'

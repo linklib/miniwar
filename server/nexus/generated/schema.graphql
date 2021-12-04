@@ -289,13 +289,6 @@ input IntNullableFilter {
 
 scalar JSON
 
-scalar Json
-
-input JsonNullableFilter {
-  equals: Json
-  not: Json
-}
-
 input LetterListRelationFilter {
   every: LetterWhereInput
   none: LetterWhereInput
@@ -579,7 +572,7 @@ input PostWhereInput {
   PostImages: PostImageListRelationFilter
   catalogId: StringFilter
   catalogNewId: StringFilter
-  content: JsonNullableFilter
+  content: StringNullableFilter
   createdAt: DateTimeFilter
   createdById: StringFilter
   description: StringNullableFilter

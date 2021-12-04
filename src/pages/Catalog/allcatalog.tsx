@@ -32,7 +32,7 @@ export const CatalogsPage: Page = () => {
               <Link
                 href={{
                   pathname: `/catalog/${c.urlname}`,
-                  query: { title: c.title },
+                  //query: { title: c.title },
                 }}
               >
                 {c.title}

@@ -27,6 +27,7 @@ export const CatalogsPage: Page = () => {
   })
 
   const parentid = parent?.data?.catalogNews[0].id
+  const parentTitle = parent?.data?.catalogNews[0].title
 
   //console.log('parent', parent?.data?.catalogNews[0].id)
 
@@ -47,7 +48,7 @@ export const CatalogsPage: Page = () => {
     <>
       <NextSeo title="Каталог" />
 
-      <h1>{urlname}</h1>
+      <h1>{parentTitle}</h1>
 
       <CatalogsPageView catalogs={data.data?.catalogNews || []} />
     </>

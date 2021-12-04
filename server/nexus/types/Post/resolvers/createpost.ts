@@ -12,12 +12,14 @@ export const createpost: FieldResolver<'Mutation', 'createPost'> = async (
     throw new Error('Не был получен пользователь')
   }
 
-  const { title, description, image, catalogId, catalogNewId } = args.data
+  const { title, description, image, catalogId, catalogNewId, content } =
+    args.data
   const urlname = typeof args.data.urlname === 'string' ? args.data.urlname : ''
 
   const createData: Prisma.PostCreateInput = {
     title,
     description,
+    content,
     image,
     urlname,
     CreatedBy: {

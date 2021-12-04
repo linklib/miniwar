@@ -3,11 +3,15 @@ import Link from 'next/link'
 import { PostsPageViewProps } from './interfaces'
 import { PostsPageViewStyled } from './styles'
 
-export const PostsPageView: React.FC<PostsPageViewProps> = ({ posts }) => {
+export const PostsPageView: React.FC<PostsPageViewProps> = ({
+  posts,
+  catalogid,
+  catalogTitle,
+}) => {
   return (
     <PostsPageViewStyled>
       <Link
-        href={`/post/create?catalogId=${posts[0]?.catalogId}&catalog=${posts[0]?.Catalog?.title}`}
+        href={`/post/create?catalogNewId=${catalogid}&catalog=${catalogTitle}`}
       >
         Добавить пост в категорию
       </Link>

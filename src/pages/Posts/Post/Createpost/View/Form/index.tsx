@@ -36,10 +36,39 @@ const CreatePostForm: React.FC = () => {
 
   //console.log('catalogId', router.query)
 
-  const catalogId =
-    typeof router.query.catalogId === 'string'
-      ? router.query.catalogId
+  const catalogId = 'ckwlucfrp0005vlwg4pi8i9ff'
+
+  const catalogNewId =
+    typeof router.query.catalogNewId === 'string'
+      ? router.query.catalogNewId
       : undefined
+
+  const contentdata = {
+    blocks: [
+      {
+        type: 'h2',
+        data: {
+          text: 'Заголовок',
+        },
+      },
+      {
+        type: 'p',
+        data: {
+          text: 'Текстовый блок',
+        },
+      },
+      {
+        type: 'p',
+        data: {
+          text: 'Текстовый блок',
+        },
+      },
+    ],
+  }
+
+  const content = JSON.stringify(contentdata)
+
+  //console.log('content', typeof content)
 
   /**
    * Описываем структуру формы в соответствии с типизацией
@@ -176,6 +205,24 @@ const CreatePostForm: React.FC = () => {
     }, [])
 
   setValue('catalogId', catalogId, {
+    /**
+     * Эти параметры нужны, чтобы форма перевалидировалась
+     */
+    shouldDirty: true,
+    shouldTouch: true,
+    shouldValidate: true,
+  })
+
+  setValue('catalogNewId', catalogNewId, {
+    /**
+     * Эти параметры нужны, чтобы форма перевалидировалась
+     */
+    shouldDirty: true,
+    shouldTouch: true,
+    shouldValidate: true,
+  })
+
+  setValue('content', content, {
     /**
      * Эти параметры нужны, чтобы форма перевалидировалась
      */

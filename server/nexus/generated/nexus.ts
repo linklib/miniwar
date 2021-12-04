@@ -252,11 +252,6 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedIntNullableFilter'] | null // NestedIntNullableFilter
     notIn?: number[] | null // [Int!]
   }
-  JsonNullableFilter: {
-    // input type
-    equals?: NexusGenScalars['Json'] | null // Json
-    not?: NexusGenScalars['Json'] | null // Json
-  }
   LetterListRelationFilter: {
     // input type
     every?: NexusGenInputs['LetterWhereInput'] | null // LetterWhereInput
@@ -464,7 +459,7 @@ export interface NexusGenInputs {
     PostImages?: NexusGenInputs['PostImageListRelationFilter'] | null // PostImageListRelationFilter
     catalogId?: NexusGenInputs['StringFilter'] | null // StringFilter
     catalogNewId?: NexusGenInputs['StringFilter'] | null // StringFilter
-    content?: NexusGenInputs['JsonNullableFilter'] | null // JsonNullableFilter
+    content?: NexusGenInputs['StringNullableFilter'] | null // StringNullableFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null // DateTimeFilter
     createdById?: NexusGenInputs['StringFilter'] | null // StringFilter
     description?: NexusGenInputs['StringNullableFilter'] | null // StringNullableFilter
@@ -646,7 +641,6 @@ export interface NexusGenScalars {
   ID: string
   DateTime: Date
   JSON: any
-  Json: any
   Upload: any
 }
 

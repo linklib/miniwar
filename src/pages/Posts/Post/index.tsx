@@ -2,15 +2,17 @@ import { NextSeo } from 'next-seo'
 import React from 'react'
 import { usePostsQuery, PostsDocument } from 'src/modules/gql/generated'
 import { Page } from '../../_App/interfaces'
-//import { PostPageView } from './View'
+import { PostPageView } from './View'
 import { useRouter } from 'next/router'
+//import { PostPageProps } from './interfaces'
 
+/*
 import dynamic from 'next/dynamic'
 
 const CustomEditor = dynamic(() => import('src/components/EditorJS'), {
   ssr: false,
 })
-
+*/
 export const PostPage: Page = () => {
   const router = useRouter()
   const urlname =
@@ -32,12 +34,11 @@ export const PostPage: Page = () => {
   return (
     <>
       <NextSeo title="Posts" />
-      <h1>{post?.id}</h1>
-
-      <CustomEditor />
 
       {/*
-      <PostPageView posts={data.data?.posts || []} />*/}
+      <CustomEditor />*/}
+
+      <PostPageView post={post || []} />
     </>
   )
 }
