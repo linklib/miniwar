@@ -13,6 +13,7 @@ const CustomEditor = dynamic(() => import('src/components/EditorJS'), {
   ssr: false,
 })
 */
+
 export const PostPage: Page = () => {
   const router = useRouter()
   const urlname =
@@ -38,7 +39,7 @@ export const PostPage: Page = () => {
       {/*
       <CustomEditor />*/}
 
-      <PostPageView post={post || []} />
+      <PostPageView post={post} />
     </>
   )
 }

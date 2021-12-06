@@ -53,6 +53,7 @@
     "@editorjs/paragraph": "^2.8.0",
     "@editorjs/simple-image": "^1.4.1",
     "@hookform/resolvers": "^2.4.0",
+    "@mui/material": "^5.2.2",
     "@natterstefan/react-editor-js": "^0.3.1",
     "@prisma-cms/ui": "^2.2.2",
     "@prisma-cms/uploader": "^2.0.1",
