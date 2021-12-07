@@ -1537,6 +1537,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/cuprum@^4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/cuprum/-/cuprum-4.5.0.tgz#30e7e06e1811847e6d238417d18649fd12b00562"
+  integrity sha512-8tbFtHuXk3idsn/HCSOxbnm+qpdeEE+W6kn4UxwxX393/OKgGm/slnFcIBjrFK3WIllz3tN8aNiiDG3zuZSkiA==
+
 "@gar/promisify@^1.0.1":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.2.tgz#30aa825f11d438671d585bd44e7fd564535fc210"

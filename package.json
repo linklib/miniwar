@@ -52,6 +52,7 @@
     "@editorjs/image": "^2.6.2",
     "@editorjs/paragraph": "^2.8.0",
     "@editorjs/simple-image": "^1.4.1",
+    "@fontsource/cuprum": "^4.5.0",
     "@hookform/resolvers": "^2.4.0",
     "@mui/material": "^5.2.2",
     "@natterstefan/react-editor-js": "^0.3.1",
@@ -68,6 +69,7 @@
     "dkim-signer": "^0.2.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "file-loader": "^6.2.0",
     "generate-password": "^1.6.1",
     "graphql": "^15.3.0",
     "graphql-iso-date": "^3.6.1",
@@ -92,6 +94,7 @@
     "sharp": "^0.28.3",
     "styled-components": "^5.2.3",
     "subscriptions-transport-ws": "^0.9.18",
+    "url-loader": "^4.1.1",
     "yup": "^0.32.9"
   },
   "devDependencies": {

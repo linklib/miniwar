@@ -63,6 +63,19 @@ const CreatePostForm: React.FC = () => {
           text: 'Текстовый блок',
         },
       },
+      {
+        type: 'p',
+        data: {
+          text: 'Текстовый блок',
+        },
+      },
+      {
+        type: 'img',
+        data: {
+          text: 'Описание картиинки',
+          src: 'https://miniwar.ru/assets/img/lepka/material/akrilovaz-skalka-1.jpg',
+        },
+      },
     ],
   }
 
